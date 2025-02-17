@@ -1,8 +1,8 @@
 import express from 'express';
 import 'dotenv/config'
 import {connect as connectMongoDB} from "./model/database/MongoDB.js";
+import AuthRouter from "./controller/AuthRouter.js";
 import logger from "./middleware/Logger.js";
-import UsersRouter from "./controller/UsersRouter.js";
 
 const app = express();
 // todo: use env variable
@@ -24,6 +24,6 @@ connectMongoDB()
         console.error(`Erreur lors de la connexion à la base de données: ${error.message}`);
     });
 
-app.use("/api/users", UsersRouter);
+app.use("/api/auth", AuthRouter);
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

@@ -19,6 +19,22 @@ export const UserRepository = {
         }
     },
 
+    getByEmail: async function(email) {
+        try {
+            return await UserModel.findOne({"email": email});
+        } catch (err) {
+            return null;
+        }
+    },
+
+    getByUsername: async function(username) {
+        try {
+            return await UserModel.findOne({"username": username});
+        } catch (err) {
+            return null;
+        }
+    },
+
     update: async function(id, newUser) {
         return await UserModel.findByIdAndUpdate(id, newUser, {new: true});
     },
