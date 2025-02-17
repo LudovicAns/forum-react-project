@@ -10,6 +10,8 @@ if (!PORT) {
     throw new Error('PORT is not defined');
 }
 
+app.use(express.json());
+
 connectMongoDB()
     .then(() => {
         console.log(`Connexion avec la base de données: OK.`)
