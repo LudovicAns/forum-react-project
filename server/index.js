@@ -1,6 +1,7 @@
 import express from 'express';
 import 'dotenv/config'
 import {connect as connectMongoDB} from "./model/database/MongoDB.js";
+import logger from "./middleware/Logger.js";
 
 const app = express();
 // todo: use env variable
@@ -9,6 +10,8 @@ const PORT = process.env.APP_PORT;
 if (!PORT) {
     throw new Error('PORT is not defined');
 }
+
+app.use(logger);
 
 app.use(express.json());
 
