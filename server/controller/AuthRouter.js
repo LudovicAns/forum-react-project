@@ -38,4 +38,11 @@ router.post("/login", (req, res) => {
         })
 })
 
+router.post("/logout", (req, res) => {
+    res.clearCookie('jwt');
+    res.status(200).json({
+        message: "User logged out"
+    });
+})
+
 export default router;
