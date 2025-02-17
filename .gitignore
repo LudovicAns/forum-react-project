@@ -1,4 +1,7 @@
 # IDE
 .idea
 
+# Env files
+**/.env
+
 **/node_modules
