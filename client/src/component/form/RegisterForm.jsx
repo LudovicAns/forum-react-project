@@ -1,5 +1,5 @@
 import React from 'react';
-import {Field, FieldGroup, Fieldset, Label, Legend} from "../catalyst-ui/fieldset.jsx";
+import {ErrorMessage, Field, FieldGroup, Fieldset, Label, Legend} from "../catalyst-ui/fieldset.jsx";
 import {Input} from "../catalyst-ui/input.jsx";
 import {Button} from "../catalyst-ui/button.jsx";
 import {Text} from "../catalyst-ui/text.jsx";
@@ -53,18 +53,22 @@ function RegisterForm(props) {
                     <Field>
                         <Label>Nom d'utilisateur</Label>
                         <Input name={"username"} type={"text"} {...register("username")}/>
+                        <ErrorMessage>{errors.username?.message}</ErrorMessage>
                     </Field>
                     <Field>
                         <Label>Adresse email</Label>
                         <Input name={"email"} type={"email"} {...register("email")}/>
+                        <ErrorMessage>{errors.email?.message}</ErrorMessage>
                     </Field>
                     <Field>
                         <Label>Mot de passe</Label>
                         <Input name={"password"} type={"password"} {...register("password")}/>
+                        <ErrorMessage>{errors.password?.message}</ErrorMessage>
                     </Field>
                     <Field>
                         <Label>Confirmation du mot de passe</Label>
                         <Input name={"passwordConfirmation"} type={"password"} {...register("confirmPassword")}/>
+                        <ErrorMessage>{errors.confirmPassword?.message}</ErrorMessage>
                     </Field>
                     <Divider/>
                     <Button className={"w-full"} type={"submit"}>S'inscrire</Button>
