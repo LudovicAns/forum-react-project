@@ -7,8 +7,11 @@ import {Divider} from "../catalyst-ui/divider.jsx";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {loginSchema} from "../../validation/User.js";
+import axios from "axios";
 
 function LoginForm() {
+
+    const [requestInfo, setRequestInfo] = React.useState({init: false, success: undefined, message: ""});
 
     const {
         register,
@@ -19,7 +22,21 @@ function LoginForm() {
     });
 
     function onSubmit(data) {
-        
+        axios.post("http://localhost:3000/api/auth/login", data)
+            .then(res => {
+                setRequestInfo({
+                    init: true,
+                    success: true,
+                    message: res.data.message
+                });
+            })
+            .catch(err => {
+                setRequestInfo({
+                    init: true,
+                    success: false,
+                    message: err.response.data.message
+                });
+            });
     }
 
     return (
@@ -41,6 +58,10 @@ function LoginForm() {
                     </Field>
                     <Divider/>
                     <Button className={"w-full"} type={"submit"}>Connexion</Button>
+                    {(requestInfo.init && !requestInfo.success) &&
+                        <Text className={"text-center !text-red-600 !dark:text-red-500"}>{requestInfo.message}</Text>}
+                    {(requestInfo.init && requestInfo.success) &&
+                        <Text className={"text-center"}>{requestInfo.message}</Text>}
                 </FieldGroup>
             </Fieldset>
         </form>
