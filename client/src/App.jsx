@@ -5,6 +5,7 @@ import Login from "./component/page/Login.jsx";
 import Register from "./component/page/Register.jsx";
 import NavLayout from "./component/layout/NavLayout.jsx";
 import Forum from "./component/page/Forum.jsx";
+import RedirectIfConnected from "./component/redirect/RedirectIfConnected.jsx";
 
 function App() {
 
@@ -15,8 +16,8 @@ function App() {
                 <Route index element={<Home/>}/>
 
                 <Route element={<AuthLayout/>}>
-                    <Route path="register" element={<Register/>}/>
-                    <Route path="login" element={<Login/>}/>
+                    <Route path="register" element={<RedirectIfConnected to={"/"}><Register/></RedirectIfConnected>}/>
+                    <Route path="login" element={<RedirectIfConnected to={"/"}><Login/></RedirectIfConnected>}/>
                 </Route>
 
                 <Route path="forum" element={<Forum/>}/>

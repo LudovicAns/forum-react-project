@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Outlet, useLocation} from "react-router";
 import {StackedLayout} from "../catalyst-ui/stacked-layout.jsx";
 import {Navbar, NavbarDivider, NavbarItem, NavbarLabel, NavbarSection, NavbarSpacer} from "../catalyst-ui/navbar.jsx";
@@ -22,6 +22,8 @@ import {
 import {useTheme} from "../../context/ThemeContextProvider.jsx";
 import logo from "../../assets/logo.svg";
 import {Avatar} from "../catalyst-ui/avatar.jsx";
+import {UserContext} from "../../context/UserContextProvider.jsx";
+import avatarImg from "../../assets/avatar.png";
 
 const navItems = [
     {
@@ -37,8 +39,14 @@ const navItems = [
 ]
 
 function NavLayout() {
+    const userContext = React.useContext(UserContext);
+
     const {theme, toggleTheme} = useTheme();
     const location = useLocation();
+
+    useEffect(() => {
+        console.log("UserContext has been updated:", userContext.user);
+    }, [userContext.user]); // Dépendance sur 'user'
 
     return (
         <StackedLayout navbar={
@@ -58,14 +66,23 @@ function NavLayout() {
                 <NavbarSpacer/>
                 <NavbarDivider className={`max-lg:hidden`}/>
                 <NavbarSection className={`max-lg:hidden`}>
-                    <NavbarItem href="/login" current={location.pathname === '/login'}>
-                        <ArrowRightEndOnRectangleIcon/>
-                        <NavbarLabel>Connexion</NavbarLabel>
-                    </NavbarItem>
-                    <NavbarItem href="/register" current={location.pathname === '/register'}>
-                        <UserPlusIcon/>
-                        <NavbarLabel>Inscription</NavbarLabel>
-                    </NavbarItem>
+                    {
+                        userContext.user ?
+                            <NavbarItem href="/profile">
+                                <Avatar src={avatarImg}/>
+                                <NavbarLabel>{userContext.user.username}</NavbarLabel>
+                            </NavbarItem> :
+                            <>
+                                <NavbarItem href="/login" current={location.pathname === '/login'}>
+                                    <ArrowRightEndOnRectangleIcon/>
+                                    <NavbarLabel>Connexion</NavbarLabel>
+                                </NavbarItem>
+                                <NavbarItem href="/register" current={location.pathname === '/register'}>
+                                    <UserPlusIcon/>
+                                    <NavbarLabel>Inscription</NavbarLabel>
+                                </NavbarItem>
+                            </>
+                    }
                 </NavbarSection>
                 <NavbarDivider/>
                 <NavbarItem onClick={toggleTheme}>
