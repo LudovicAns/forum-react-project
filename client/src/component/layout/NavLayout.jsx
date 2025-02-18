@@ -69,7 +69,7 @@ function NavLayout() {
                 </NavbarSection>
                 <NavbarDivider/>
                 <NavbarItem onClick={toggleTheme}>
-                    {theme === 'light' ? <MoonIcon/> : <SunIcon/>}
+                    {theme === 'light' ? <MoonIcon className={"cursor-pointer"}/> : <SunIcon className={"cursor-pointer"}/>}
                 </NavbarItem>
             </Navbar>
         } sidebar={
