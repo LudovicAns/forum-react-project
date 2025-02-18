@@ -60,7 +60,7 @@ router.get("/me", Auth, async (req, res) => {
 
     res.status(200).json({
         message: "Informations utilisateur récupérées",
-        data: userDto
+        data: user
     })
 })
 
