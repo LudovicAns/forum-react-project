@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {ErrorMessage, Field, FieldGroup, Fieldset, Label, Legend} from "../catalyst-ui/fieldset.jsx";
 import {Input} from "../catalyst-ui/input.jsx";
 import {Button} from "../catalyst-ui/button.jsx";
@@ -7,36 +7,42 @@ import {Divider} from "../catalyst-ui/divider.jsx";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {loginSchema} from "../../validation/User.js";
-import axios from "axios";
+import {UserContext} from "../../context/UserContextProvider.jsx";
 
 function LoginForm() {
+
+    const userContext = useContext(UserContext);
 
     const [requestInfo, setRequestInfo] = React.useState({init: false, success: undefined, message: ""});
 
     const {
         register,
         formState: {errors},
-        handleSubmit
+        handleSubmit,
+        reset
     } = useForm({
         resolver: zodResolver(loginSchema)
     });
 
     function onSubmit(data) {
-        axios.post("http://localhost:3000/api/auth/login", data)
-            .then(res => {
-                setRequestInfo({
-                    init: true,
-                    success: true,
-                    message: res.data.message
-                });
-            })
-            .catch(err => {
-                setRequestInfo({
-                    init: true,
-                    success: false,
-                    message: err.response.data.message
-                });
+        function onSuccess(res) {
+            setRequestInfo({
+                init: true,
+                success: true,
+                message: res.data.message
             });
+            reset();
+        }
+
+        function onError(err) {
+            setRequestInfo({
+                init: true,
+                success: false,
+                message: err.response.data.message
+            });
+        }
+
+        userContext.login(data, onSuccess, onError);
     }
 
     return (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {ErrorMessage, Field, FieldGroup, Fieldset, Label, Legend} from "../catalyst-ui/fieldset.jsx";
 import {Input} from "../catalyst-ui/input.jsx";
 import {Button} from "../catalyst-ui/button.jsx";
@@ -7,10 +7,12 @@ import {Divider} from "../catalyst-ui/divider.jsx";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {registerSchema} from "../../validation/User.js";
-import axios from "axios";
+import {UserContext} from "../../context/UserContextProvider.jsx";
 
 function RegisterForm(props) {
 
+    const userContext = useContext(UserContext);
+    
     const [requestInfo, setRequestInfo] = React.useState({init: false, success: undefined, message: ""});
 
     const {
@@ -23,24 +25,26 @@ function RegisterForm(props) {
     });
 
     function onSubmit(data) {
-        axios.post("http://localhost:3000/api/auth/register", data)
-            .then(res => {
+        function onSuccess(res) {
+            setRequestInfo({
+                init: true,
+                success: true,
+                message: res.data.message
+            })
+            reset();
+        }
+
+        function onError(err) {
+            if (err) {
                 setRequestInfo({
                     init: true,
-                    success: true,
-                    message: res.data.message
+                    success: false,
+                    message: err.response.data.message
                 })
-                reset();
-            })
-            .catch(err => {
-                if (err) {
-                    setRequestInfo({
-                        init: true,
-                        success: false,
-                        message: err.response.data.message
-                    })
-                }
-            });
+            }
+        }
+
+        userContext.register(data, onSuccess, onError);
     }
 
     return (
