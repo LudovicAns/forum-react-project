@@ -3,14 +3,23 @@ import 'dotenv/config'
 import {connect as connectMongoDB} from "./model/database/MongoDB.js";
 import AuthRouter from "./controller/AuthRouter.js";
 import logger from "./middleware/Logger.js";
+import cors from 'cors';
 
 const app = express();
-// todo: use env variable
 const PORT = process.env.APP_PORT;
 
 if (!PORT) {
     throw new Error('PORT is not defined');
 }
+
+const corsOptions = {
+    // todo : env variable
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
+};
+
+app.use(cors(corsOptions)); // Ajout de CORS à l'application
 
 app.use(logger);
 
