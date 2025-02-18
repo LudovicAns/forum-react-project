@@ -10,7 +10,7 @@ export function UserProvider({children}) {
     useEffect(() => {
         axios.get("http://localhost:3000/api/auth/me", {withCredentials: true})
             .then(res => {
-                setUser(res.data.user);
+                setUser(res.data.data);
             });
     }, [])
 
