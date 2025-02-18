@@ -1,10 +1,10 @@
 import React, {useContext} from 'react';
 import {Heading} from "../catalyst-ui/heading.jsx";
-import {Text} from "../catalyst-ui/text.jsx";
+import {Strong, Text} from "../catalyst-ui/text.jsx";
 import {UserContext} from "../../context/UserContextProvider.jsx";
 import ProfilWidget from "../widget/ProfilWidget.jsx";
-import {Divider} from "../catalyst-ui/divider.jsx";
 import {Button} from "../catalyst-ui/button.jsx";
+import {Badge} from "../catalyst-ui/badge.jsx";
 
 function Profile() {
 
@@ -22,6 +22,13 @@ function Profile() {
                 <Heading>Modification</Heading>
                 <Text className={"mb-4"}>Vous pouvez modifier votre profil en cliquant sur le bouton ci-dessous.</Text>
                 <Button href={"/profile/edit"}>Modifier</Button>
+            </section>
+            <section>
+                <Heading>
+                    Statistiques <Badge color={"yellow"}>Bientôt disponible</Badge>
+                </Heading>
+                <Text className={"mb-4"}>Les statistiques de votre profil permettent de visualiser rapidement votre
+                    présence sur <Strong>Forum</Strong>.</Text>
             </section>
         </main>
     )

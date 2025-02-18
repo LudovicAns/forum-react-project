@@ -26,7 +26,7 @@ function ProfilWidget({className}) {
                     <DescriptionTerm>Rôle</DescriptionTerm>
                     <DescriptionDetails>
                         <Badge
-                            color={"blue"}>{userContext.user.role ? userContext.user.role : "Bientôt disponible"}</Badge>
+                            color={"yellow"}>{userContext.user.role ? userContext.user.role : "Bientôt disponible"}</Badge>
                     </DescriptionDetails>
                 </DescriptionList>
                 <div className={"h-full"}>
