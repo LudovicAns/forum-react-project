@@ -1,10 +1,10 @@
 import React from 'react';
-import {Heading} from "../catalyst-ui/heading.jsx";
+import LoginForm from "../form/LoginForm.jsx";
 
 function Login(props) {
     return (
         <main>
-            <Heading>Login</Heading>
+            <LoginForm/>
         </main>
     );
 }

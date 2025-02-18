@@ -1,10 +1,10 @@
 import {Route, Routes} from "react-router";
 import AuthLayout from "./component/layout/AuthLayout.jsx";
-import Home from "./component/pages/Home.jsx";
-import Login from "./component/pages/Login.jsx";
-import Register from "./component/pages/Register.jsx";
+import Home from "./component/page/Home.jsx";
+import Login from "./component/page/Login.jsx";
+import Register from "./component/page/Register.jsx";
 import NavLayout from "./component/layout/NavLayout.jsx";
-import Forum from "./component/pages/Forum.jsx";
+import Forum from "./component/page/Forum.jsx";
 
 function App() {
 

@@ -3,7 +3,7 @@ import {Outlet} from "react-router";
 
 function AuthLayout() {
     return (
-        <div className={``}>
+        <div className={`flex justify-center w-full`}>
             <Outlet />
         </div>
     );
