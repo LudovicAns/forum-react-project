@@ -56,7 +56,7 @@ function NavLayout() {
         <StackedLayout navbar={
             <Navbar>
                 <NavbarItem className={`max-lg:hidden`} href="/">
-                    <Avatar src={logo} alt="logo"/>
+                    <Avatar src={logo} alt="logo" square={true}/>
                 </NavbarItem>
                 <NavbarDivider className={`max-lg:hidden`}/>
                 <NavbarSection className={`max-lg:hidden`}>
@@ -112,7 +112,7 @@ function NavLayout() {
             <Sidebar>
                 <SidebarHeader>
                     <SidebarItem>
-                        <Avatar src={logo}/>
+                        <Avatar src={logo} alt={"logo"} square={true}/>
                         <SidebarLabel>Forum</SidebarLabel>
                     </SidebarItem>
                 </SidebarHeader>
