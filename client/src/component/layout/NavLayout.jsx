@@ -13,10 +13,10 @@ import {
 } from "../catalyst-ui/sidebar.jsx";
 import {
     ArrowRightEndOnRectangleIcon,
-    ChatBubbleBottomCenterTextIcon,
+    ChatBubbleBottomCenterTextIcon, ChevronDoubleDownIcon, ChevronDownIcon,
     HomeIcon,
-    MoonIcon,
-    SunIcon,
+    MoonIcon, PowerIcon,
+    SunIcon, UserCircleIcon,
     UserPlusIcon
 } from "@heroicons/react/20/solid/index.js";
 import {useTheme} from "../../context/ThemeContextProvider.jsx";
@@ -24,6 +24,14 @@ import logo from "../../assets/logo.svg";
 import {Avatar} from "../catalyst-ui/avatar.jsx";
 import {UserContext} from "../../context/UserContextProvider.jsx";
 import avatarImg from "../../assets/avatar.png";
+import {
+    Dropdown,
+    DropdownButton,
+    DropdownDivider,
+    DropdownItem,
+    DropdownLabel,
+    DropdownMenu
+} from "../catalyst-ui/dropdown.jsx";
 
 const navItems = [
     {
@@ -43,10 +51,6 @@ function NavLayout() {
 
     const {theme, toggleTheme} = useTheme();
     const location = useLocation();
-
-    useEffect(() => {
-        console.log("UserContext has been updated:", userContext.user);
-    }, [userContext.user]); // Dépendance sur 'user'
 
     return (
         <StackedLayout navbar={
@@ -68,10 +72,25 @@ function NavLayout() {
                 <NavbarSection className={`max-lg:hidden`}>
                     {
                         userContext.user ?
-                            <NavbarItem href="/profile">
-                                <Avatar src={avatarImg}/>
-                                <NavbarLabel>{userContext.user.username}</NavbarLabel>
-                            </NavbarItem> :
+                            <Dropdown>
+                                <DropdownButton as={NavbarItem}>
+                                    <Avatar src={avatarImg}/>
+                                    <NavbarLabel>{userContext.user.username}</NavbarLabel>
+                                    <ChevronDownIcon />
+                                </DropdownButton>
+                                <DropdownMenu>
+                                    <DropdownItem href="/profile" className={"cursor-pointer"}>
+                                        <UserCircleIcon/>
+                                        <DropdownLabel>Votre Profil</DropdownLabel>
+                                    </DropdownItem>
+                                    <DropdownDivider/>
+                                    <DropdownItem className={"cursor-pointer"} onClick={() => userContext.logout()}>
+                                        <PowerIcon className={"fill-red-500"}/>
+                                        <DropdownLabel className={"text-red-500"}>Déconnexion</DropdownLabel>
+                                    </DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>
+                            :
                             <>
                                 <NavbarItem href="/login" current={location.pathname === '/login'}>
                                     <ArrowRightEndOnRectangleIcon/>
@@ -108,14 +127,38 @@ function NavLayout() {
                     </SidebarSection>
                 </SidebarBody>
                 <SidebarFooter>
-                    <SidebarItem href="/login" current={location.pathname === '/login'}>
-                        <ArrowRightEndOnRectangleIcon/>
-                        <SidebarLabel>Connexion</SidebarLabel>
-                    </SidebarItem>
-                    <SidebarItem href="/register" current={location.pathname === '/register'}>
-                        <UserPlusIcon/>
-                        <SidebarLabel>Inscription</SidebarLabel>
-                    </SidebarItem>
+                    {
+                        userContext.user ?
+                            <Dropdown>
+                                <DropdownButton as={NavbarItem}>
+                                    <Avatar src={avatarImg}/>
+                                    <NavbarLabel>{userContext.user.username}</NavbarLabel>
+                                    <ChevronDownIcon />
+                                </DropdownButton>
+                                <DropdownMenu>
+                                    <DropdownItem href="/profile" className={"cursor-pointer"}>
+                                        <UserCircleIcon/>
+                                        <DropdownLabel>Votre Profil</DropdownLabel>
+                                    </DropdownItem>
+                                    <DropdownDivider/>
+                                    <DropdownItem className={"cursor-pointer"} onClick={() => userContext.logout()}>
+                                        <PowerIcon className={"fill-red-500"}/>
+                                        <DropdownLabel className={"text-red-500"}>Déconnexion</DropdownLabel>
+                                    </DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>
+                            :
+                            <>
+                                <SidebarItem href="/login" current={location.pathname === '/login'}>
+                                    <ArrowRightEndOnRectangleIcon/>
+                                    <NavbarLabel>Connexion</NavbarLabel>
+                                </SidebarItem>
+                                <SidebarItem href="/register" current={location.pathname === '/register'}>
+                                    <UserPlusIcon/>
+                                    <SidebarLabel>Inscription</SidebarLabel>
+                                </SidebarItem>
+                            </>
+                    }
                 </SidebarFooter>
             </Sidebar>
         }>
