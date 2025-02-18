@@ -61,7 +61,10 @@ export const UserService = {
             throw new Error('Login and/or password is incorrect');
         }
 
-        return JwtService.sign({id: user.id});
+        return {
+            token: JwtService.sign({id: user.id}),
+            user: user,
+        };
     },
 
     getAll: async function () {

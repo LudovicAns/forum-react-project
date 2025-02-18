@@ -6,7 +6,7 @@ import {userDto} from "../model/dto/User.js";
 
 const router = express.Router();
 
-router.post("/register", (req, res) => {
+router.post("/register", async (req, res) => {
     UserService.register(req.body)
         .then(user => {
             res.status(201).json({
@@ -21,28 +21,31 @@ router.post("/register", (req, res) => {
         })
 });
 
-router.post("/login", (req, res) => {
+router.post("/login", async (req, res) => {
     UserService.login(req.body)
-        .then(token => {
-            res.cookie('jwt', token, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
-                sameSite: 'none',
-            })
-            res.status(200).json({
-                message: "Connexion réussie",
-                data: token
-            });
+        .then(({user, token}) => {
+            res
+                .cookie('access_token', token, {
+                    httpOnly: true,
+                    secure: false,
+                    sameSite: "Lax",
+                    maxAge: 24*60*60*1000,
+                })
+                .status(200)
+                .json({
+                    message: "Connexion réussie",
+                    data: userDto(user)
+                });
         })
         .catch(error => {
             res.status(400).json({
                 message: error.message,
             })
         })
-})
+});
 
-router.post("/logout", (req, res) => {
-    res.clearCookie('jwt');
+router.post("/logout", async (req, res) => {
+    res.clearCookie('access_token');
     res.status(200).json({
         message: "Déconnexion réussie"
     });
@@ -51,9 +54,9 @@ router.post("/logout", (req, res) => {
 router.get("/me", Auth, async (req, res) => {
     const userId = res.locals.id;
 
-    const user = await UserRepository.getById(userId);
+    let user = await UserRepository.getById(userId);
 
-    const userDto = userDto(user);
+    user = userDto(user);
 
     res.status(200).json({
         message: "Informations utilisateur récupérées",
