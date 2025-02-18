@@ -8,6 +8,7 @@ import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {registerSchema} from "../../validation/User.js";
 import {UserContext} from "../../context/UserContextProvider.jsx";
+import error from "eslint-plugin-react/lib/util/error.js";
 
 function RegisterForm(props) {
 
@@ -56,22 +57,22 @@ function RegisterForm(props) {
                 <FieldGroup>
                     <Field>
                         <Label>Nom d'utilisateur</Label>
-                        <Input name={"username"} type={"text"} {...register("username")}/>
+                        <Input invalid={!!errors.username} name={"username"} type={"text"} {...register("username")}/>
                         <ErrorMessage>{errors.username?.message}</ErrorMessage>
                     </Field>
                     <Field>
                         <Label>Adresse email</Label>
-                        <Input name={"email"} type={"email"} {...register("email")}/>
+                        <Input invalid={!!errors.email} name={"email"} type={"email"} {...register("email")}/>
                         <ErrorMessage>{errors.email?.message}</ErrorMessage>
                     </Field>
                     <Field>
                         <Label>Mot de passe</Label>
-                        <Input name={"password"} type={"password"} {...register("password")}/>
+                        <Input invalid={!!errors.password} name={"password"} type={"password"} {...register("password")}/>
                         <ErrorMessage>{errors.password?.message}</ErrorMessage>
                     </Field>
                     <Field>
                         <Label>Confirmation du mot de passe</Label>
-                        <Input name={"passwordConfirmation"} type={"password"} {...register("confirmPassword")}/>
+                        <Input invalid={!!errors.confirmPassword} name={"passwordConfirmation"} type={"password"} {...register("confirmPassword")}/>
                         <ErrorMessage>{errors.confirmPassword?.message}</ErrorMessage>
                     </Field>
                     <Divider/>

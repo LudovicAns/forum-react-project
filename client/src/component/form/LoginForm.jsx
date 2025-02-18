@@ -54,12 +54,12 @@ function LoginForm() {
                 <FieldGroup>
                     <Field>
                         <Label>Email</Label>
-                        <Input name={"email"} type={"email"} {...register("email")} />
+                        <Input invalid={!!errors.email} name={"email"} type={"email"} {...register("email")} />
                         <ErrorMessage>{errors.email?.message}</ErrorMessage>
                     </Field>
                     <Field>
                         <Label>Mot de passe</Label>
-                        <Input name={"password"} type={"password"} {...register("password")} />
+                        <Input invalid={!!errors.password} name={"password"} type={"password"} {...register("password")} />
                         <ErrorMessage>{errors.password?.message}</ErrorMessage>
                     </Field>
                     <Divider/>
