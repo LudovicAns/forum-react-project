@@ -52,6 +52,62 @@ function NavLayout() {
     const {theme, toggleTheme} = useTheme();
     const location = useLocation();
 
+    function UserDropDown() {
+        if (userContext.loading) return (<></>)
+        return (
+            <Dropdown>
+                <DropdownButton as={NavbarItem}>
+                    <Avatar src={avatarImg}/>
+                    <NavbarLabel>{userContext.user.username}</NavbarLabel>
+                    <ChevronDownIcon />
+                </DropdownButton>
+                <DropdownMenu>
+                    <DropdownItem href="/profile" className={"cursor-pointer"}>
+                        <UserCircleIcon/>
+                        <DropdownLabel>Votre Profil</DropdownLabel>
+                    </DropdownItem>
+                    <DropdownDivider/>
+                    <DropdownItem className={"cursor-pointer"} onClick={() => userContext.logout()}>
+                        <PowerIcon className={"fill-red-500"}/>
+                        <DropdownLabel className={"text-red-500"}>Déconnexion</DropdownLabel>
+                    </DropdownItem>
+                </DropdownMenu>
+            </Dropdown>
+        );
+    }
+
+    function AuthNavbarComponent() {
+        if (userContext.loading) return (<></>)
+        return (
+            <>
+                <NavbarItem href="/login" current={location.pathname === '/login'}>
+                    <ArrowRightEndOnRectangleIcon/>
+                    <NavbarLabel>Connexion</NavbarLabel>
+                </NavbarItem>
+                <NavbarItem href="/register" current={location.pathname === '/register'}>
+                    <UserPlusIcon/>
+                    <NavbarLabel>Inscription</NavbarLabel>
+                </NavbarItem>
+            </>
+        );
+    }
+
+    function AuthSidebarComponent() {
+        if (userContext.loading) return (<></>)
+        return (
+            <>
+                <SidebarItem href="/login" current={location.pathname === '/login'}>
+                    <ArrowRightEndOnRectangleIcon/>
+                    <NavbarLabel>Connexion</NavbarLabel>
+                </SidebarItem>
+                <SidebarItem href="/register" current={location.pathname === '/register'}>
+                    <UserPlusIcon/>
+                    <SidebarLabel>Inscription</SidebarLabel>
+                </SidebarItem>
+            </>
+        );
+    }
+
     return (
         <StackedLayout navbar={
             <Navbar>
@@ -71,36 +127,7 @@ function NavLayout() {
                 <NavbarDivider className={`max-lg:hidden`}/>
                 <NavbarSection className={`max-lg:hidden`}>
                     {
-                        userContext.user ?
-                            <Dropdown>
-                                <DropdownButton as={NavbarItem}>
-                                    <Avatar src={avatarImg}/>
-                                    <NavbarLabel>{userContext.user.username}</NavbarLabel>
-                                    <ChevronDownIcon />
-                                </DropdownButton>
-                                <DropdownMenu>
-                                    <DropdownItem href="/profile" className={"cursor-pointer"}>
-                                        <UserCircleIcon/>
-                                        <DropdownLabel>Votre Profil</DropdownLabel>
-                                    </DropdownItem>
-                                    <DropdownDivider/>
-                                    <DropdownItem className={"cursor-pointer"} onClick={() => userContext.logout()}>
-                                        <PowerIcon className={"fill-red-500"}/>
-                                        <DropdownLabel className={"text-red-500"}>Déconnexion</DropdownLabel>
-                                    </DropdownItem>
-                                </DropdownMenu>
-                            </Dropdown>
-                            :
-                            <>
-                                <NavbarItem href="/login" current={location.pathname === '/login'}>
-                                    <ArrowRightEndOnRectangleIcon/>
-                                    <NavbarLabel>Connexion</NavbarLabel>
-                                </NavbarItem>
-                                <NavbarItem href="/register" current={location.pathname === '/register'}>
-                                    <UserPlusIcon/>
-                                    <NavbarLabel>Inscription</NavbarLabel>
-                                </NavbarItem>
-                            </>
+                        userContext.user ? UserDropDown() : AuthNavbarComponent()
                     }
                 </NavbarSection>
                 <NavbarDivider/>
@@ -128,36 +155,7 @@ function NavLayout() {
                 </SidebarBody>
                 <SidebarFooter>
                     {
-                        userContext.user ?
-                            <Dropdown>
-                                <DropdownButton as={NavbarItem}>
-                                    <Avatar src={avatarImg}/>
-                                    <NavbarLabel>{userContext.user.username}</NavbarLabel>
-                                    <ChevronDownIcon />
-                                </DropdownButton>
-                                <DropdownMenu>
-                                    <DropdownItem href="/profile" className={"cursor-pointer"}>
-                                        <UserCircleIcon/>
-                                        <DropdownLabel>Votre Profil</DropdownLabel>
-                                    </DropdownItem>
-                                    <DropdownDivider/>
-                                    <DropdownItem className={"cursor-pointer"} onClick={() => userContext.logout()}>
-                                        <PowerIcon className={"fill-red-500"}/>
-                                        <DropdownLabel className={"text-red-500"}>Déconnexion</DropdownLabel>
-                                    </DropdownItem>
-                                </DropdownMenu>
-                            </Dropdown>
-                            :
-                            <>
-                                <SidebarItem href="/login" current={location.pathname === '/login'}>
-                                    <ArrowRightEndOnRectangleIcon/>
-                                    <NavbarLabel>Connexion</NavbarLabel>
-                                </SidebarItem>
-                                <SidebarItem href="/register" current={location.pathname === '/register'}>
-                                    <UserPlusIcon/>
-                                    <SidebarLabel>Inscription</SidebarLabel>
-                                </SidebarItem>
-                            </>
+                        userContext.user ? UserDropDown() : AuthSidebarComponent()
                     }
                 </SidebarFooter>
             </Sidebar>

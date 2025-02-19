@@ -5,19 +5,23 @@ export const UserContext = createContext();
 
 export function UserProvider({children}) {
 
+    const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
 
     useEffect(() => {
+        setLoading(true);
         axios.get("http://localhost:3000/api/auth/me", {
             withCredentials: true,
         })
             .then(res => {
-                console.log(res);
                 setUser(res.data.data);
             })
             .catch(err => {
                 console.log(err);
             })
+            .finally(() => {
+                setLoading(false);
+            });
     }, [])
 
     function register(data, onSuccess, onError, onEnd) {
@@ -56,6 +60,7 @@ export function UserProvider({children}) {
 
     return (
         <UserContext.Provider value={{
+            loading,
             user,
             register,
             login,
