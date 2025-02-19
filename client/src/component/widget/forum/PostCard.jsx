@@ -10,11 +10,11 @@ function PostCard({post}) {
 
     return (
         <div className={"flex flex-col gap-2 w-full h-fit border border-zinc-950/10 dark:border-white/10 rounded-md p-8"}>
-            <div className={"flex flex-row justify-between"}>
+            <div className={"flex flex-row gap-2 justify-between"}>
                 <Subheading>{post.title}</Subheading>
                 <div className={"flex flex-row gap-2"}>
                     <Avatar className={"size-[24px] dark:bg-white dark:text-black bg-black text-white"} src={""} initials={"A"}/>
-                    <TextLink href={`/profile/${post.author}`} className={"!no-underline"}>AnonymeUser</TextLink>
+                    <TextLink href={`/profile/${post.author}`} className={"!no-underline max-md:hidden"}>AnonymeUser</TextLink>
                 </div>
             </div>
             <div className={"h-12 max-h-12"}>

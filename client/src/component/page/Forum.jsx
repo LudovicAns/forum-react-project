@@ -1,5 +1,4 @@
 import React from 'react';
-import {Heading} from "../catalyst-ui/heading.jsx";
 import PostCardList from "../widget/forum/PostCardList.jsx";
 import PostCard from "../widget/forum/PostCard.jsx";
 
