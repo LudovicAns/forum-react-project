@@ -9,6 +9,7 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {loginSchema} from "../../validation/User.js";
 import {UserContext} from "../../context/UserContextProvider.jsx";
 import {Checkbox, CheckboxField} from "../catalyst-ui/checkbox.jsx";
+import {Badge} from "../catalyst-ui/badge.jsx";
 
 function LoginForm() {
 
@@ -65,7 +66,7 @@ function LoginForm() {
                     </Field>
                     <CheckboxField>
                         <Checkbox name={"rememberMe"} {...register("rememberMe")}/>
-                        <Label>Se souvenir de moi</Label>
+                        <Label>Se souvenir de moi <Badge color={"yellow"}>Bientôt disponible</Badge></Label>
                     </CheckboxField>
                     <Divider/>
                     <Button className={"w-full"} type={"submit"}>Connexion</Button>
