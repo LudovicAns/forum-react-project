@@ -23,7 +23,6 @@ import {useTheme} from "../../context/ThemeContextProvider.jsx";
 import logo from "../../assets/logo.svg";
 import {Avatar} from "../catalyst-ui/avatar.jsx";
 import {UserContext} from "../../context/UserContextProvider.jsx";
-import avatarImg from "../../assets/avatar.png";
 import {
     Dropdown,
     DropdownButton,
@@ -57,7 +56,9 @@ function NavLayout() {
         return (
             <Dropdown>
                 <DropdownButton as={NavbarItem}>
-                    <Avatar src={avatarImg}/>
+                    <Avatar src={userContext.user.avatar}
+                            initials={userContext.user.username[0]}
+                            className={"bg-zinc-900 text-white dark:bg-white dark:text-black"}/>
                     <NavbarLabel>{userContext.user.username}</NavbarLabel>
                     <ChevronDownIcon />
                 </DropdownButton>

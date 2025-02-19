@@ -1,6 +1,5 @@
 import React, {useContext} from 'react';
 import {Avatar} from "../catalyst-ui/avatar.jsx";
-import avatar from "../../assets/avatar.png";
 import {DescriptionDetails, DescriptionList, DescriptionTerm} from "../catalyst-ui/description-list.jsx";
 import {Badge} from "../catalyst-ui/badge.jsx";
 import {UserContext} from "../../context/UserContextProvider.jsx";
@@ -17,7 +16,10 @@ function ProfilWidget({className}) {
             <div
                 className={clsx(className, "flex flex-row max-md:flex-col gap-16")}>
                 <div className={"w-fit max-md:w-full flex justify-center"}>
-                    <Avatar src={avatar} alt={"avatar"} className={"size-48"}/>
+                    <Avatar src={userContext.user.avatar}
+                            initials={userContext.user.username[0]}
+                            alt={"avatar"}
+                            className={"size-48 bg-zinc-900 text-white dark:bg-white dark:text-black"}/>
                 </div>
                 <div className={"w-full"}>
                     <DescriptionList className={"w-full"}>
