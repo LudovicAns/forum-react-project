@@ -9,6 +9,7 @@ import RedirectIfConnected from "./component/redirect/RedirectIfConnected.jsx";
 import RedirectIfNotConnected from "./component/redirect/RedirectIfNotConnected.jsx";
 import Profile from "./component/page/Profile.jsx";
 import ProfileEdit from "./component/page/ProfileEdit.jsx";
+import Error404 from "./component/page/Error404.jsx";
 
 function App() {
 
@@ -35,6 +36,8 @@ function App() {
                 }/>
 
                 <Route path="forum" element={<Forum/>}/>
+
+                <Route path="*" element={<Error404/>}/>
 
             </Route>
 
