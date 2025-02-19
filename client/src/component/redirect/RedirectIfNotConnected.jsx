@@ -5,6 +5,8 @@ import {Navigate} from "react-router";
 function RedirectIfNotConnected({children, to = "/login"}) {
     const userContext = useContext(UserContext);
 
+    if (userContext.loading) return <></>;
+
     if (!userContext.user) return <Navigate to={"/login"}/>
 
     return children;
