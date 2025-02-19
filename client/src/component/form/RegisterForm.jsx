@@ -9,11 +9,14 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {registerSchema} from "../../validation/User.js";
 import {UserContext} from "../../context/UserContextProvider.jsx";
 import error from "eslint-plugin-react/lib/util/error.js";
+import {useNavigate} from "react-router";
 
 function RegisterForm(props) {
 
     const userContext = useContext(UserContext);
-    
+
+    const navigate = useNavigate();
+
     const [requestInfo, setRequestInfo] = React.useState({init: false, success: undefined, message: ""});
 
     const {
@@ -33,6 +36,7 @@ function RegisterForm(props) {
                 message: res.data.message
             })
             reset();
+            navigate("/login");
         }
 
         function onError(err) {
