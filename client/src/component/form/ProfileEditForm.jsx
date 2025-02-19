@@ -11,6 +11,7 @@ import {UserContext} from "../../context/UserContextProvider.jsx";
 import {Input} from "../catalyst-ui/input.jsx";
 import {Badge} from "../catalyst-ui/badge.jsx";
 import {editProfileSchema} from "../../validation/User.js";
+import axios from "axios";
 
 function ProfileEditForm({className}) {
     const userContext = useContext(UserContext);
@@ -25,11 +26,16 @@ function ProfileEditForm({className}) {
     });
 
     function onSubmit(data) {
-
+        axios.post("/api/user/edit", data, {withCredentials: true})
+            .then(res => {})
+            .catch(err => {})
+            .finally(() => reset())
     }
 
+    console.log(userContext.user);
+
     return (
-        <form className={clsx(className)} onSubmit={handleSubmit(onSubmit)}>
+        <form className={clsx(className)} encType={"multipart/form-data"} onSubmit={handleSubmit(onSubmit)}>
             <Fieldset>
                 <Legend>Informations public</Legend>
                 <Text>Modifiez ici les informations visibles par les autres utilisateurs.</Text>
@@ -41,6 +47,7 @@ function ProfileEditForm({className}) {
                                invalid={!!errors.avatar}
                                {...register("avatar")}
                                type={"file"}
+                               multiple={false}
                                accept={"image/png, image/jpeg"}/>
                         <ErrorMessage>{errors.avatar?.message}</ErrorMessage>
                     </Field>
