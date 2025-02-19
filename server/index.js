@@ -1,10 +1,13 @@
 import express from 'express';
 import 'dotenv/config'
 import {connect as connectMongoDB} from "./model/database/MongoDB.js";
-import AuthRouter from "./controller/AuthRouter.js";
+import AuthRouter from "./controller/UserRouter.js";
 import logger from "./middleware/Logger.js";
 import cors from 'cors';
 import cookieParser from "cookie-parser";
+import multer from "multer";
+import path from "path";
+import UserRouter from "./controller/UserRouter.js";
 
 const app = express();
 const PORT = process.env.APP_PORT;
@@ -13,6 +16,7 @@ if (!PORT) {
     throw new Error('PORT is not defined');
 }
 
+app.use(express.static('public'));
 app.use(cookieParser());
 
 const corsOptions = {
@@ -36,6 +40,6 @@ connectMongoDB()
         console.error(`Erreur lors de la connexion à la base de données: ${error.message}`);
     });
 
-app.use("/api/auth", AuthRouter);
+app.use("/api/users", UserRouter);
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

@@ -51,12 +51,14 @@ function NavLayout() {
     const {theme, toggleTheme} = useTheme();
     const location = useLocation();
 
+    const avatarUrl = !userContext.loading && userContext.user?.avatar ? import.meta.env.VITE_BACKEND_HOST + userContext.user.avatar : "";
+
     function UserDropDown() {
         if (userContext.loading) return (<></>)
         return (
             <Dropdown>
                 <DropdownButton as={NavbarItem}>
-                    <Avatar src={userContext.user.avatar}
+                    <Avatar src={avatarUrl}
                             initials={userContext.user.username[0]}
                             className={"bg-zinc-900 text-white dark:bg-white dark:text-black"}/>
                     <NavbarLabel>{userContext.user.username}</NavbarLabel>

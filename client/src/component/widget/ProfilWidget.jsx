@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Avatar} from "../catalyst-ui/avatar.jsx";
 import {DescriptionDetails, DescriptionList, DescriptionTerm} from "../catalyst-ui/description-list.jsx";
 import {Badge} from "../catalyst-ui/badge.jsx";
@@ -11,12 +11,14 @@ import {Text} from "../catalyst-ui/text.jsx";
 function ProfilWidget({className}) {
     const userContext = useContext(UserContext);
 
+    const avatarUrl = !userContext.loading && userContext.user?.avatar ? import.meta.env.VITE_BACKEND_HOST + userContext.user.avatar : "";
+
     return (
         <div className={clsx(className, "flex flex-col gap-8 border p-8 rounded-lg border-zinc-950/10 dark:border-white/10")}>
             <div
                 className={clsx(className, "flex flex-row max-md:flex-col gap-16")}>
                 <div className={"w-fit max-md:w-full flex justify-center"}>
-                    <Avatar src={userContext.user.avatar}
+                    <Avatar src={avatarUrl}
                             initials={userContext.user.username[0]}
                             alt={"avatar"}
                             className={"size-48 bg-zinc-900 text-white dark:bg-white dark:text-black"}/>

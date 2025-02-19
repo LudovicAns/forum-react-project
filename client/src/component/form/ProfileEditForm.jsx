@@ -12,9 +12,11 @@ import {Input} from "../catalyst-ui/input.jsx";
 import {Badge} from "../catalyst-ui/badge.jsx";
 import {editProfileSchema} from "../../validation/User.js";
 import axios from "axios";
+import {useNavigate} from "react-router";
 
 function ProfileEditForm({className}) {
     const userContext = useContext(UserContext);
+    const navigate = useNavigate();
 
     const {
         register,
@@ -26,18 +28,31 @@ function ProfileEditForm({className}) {
     });
 
     function onSubmit(data) {
-        axios.post("/api/user/edit", data, {withCredentials: true})
+        const form = new FormData();
+        if (data.avatar.length > 0) {
+            form.append("avatar", data.avatar[0]);
+        }
+        form.append("description", data.description);
+        axios.post("http://localhost:3000/api/users/edit", form, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            },
+            withCredentials: true
+        })
             .then(res => {
+                userContext.setUser(res.data.data);
+                navigate("/profile");
             })
             .catch(err => {
+                console.error(err);
             })
-            .finally(() => reset())
+            .finally(() => {
+                reset();
+            })
     }
 
-    console.log(userContext.user);
-
     return (
-        <form className={clsx(className)} encType={"multipart/form-data"} onSubmit={handleSubmit(onSubmit)}>
+        <form className={clsx(className)} onSubmit={handleSubmit(onSubmit)}>
             <Fieldset>
                 <Legend>Informations public</Legend>
                 <Text>Modifiez ici les informations visibles par les autres utilisateurs.</Text>

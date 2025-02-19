@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 
 const SECRET_KEY = process.env.USER_AUTH_SECRET_KEY
-const EXPIRES_IN = process.env.USER_AUTH_EXPIRES_IN
+const EXPIRES_IN = parseInt(process.env.USER_AUTH_EXPIRES_IN)
 
 export default {
     sign: (payload) => {

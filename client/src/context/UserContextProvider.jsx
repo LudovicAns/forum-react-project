@@ -10,7 +10,7 @@ export function UserProvider({children}) {
 
     useEffect(() => {
         setLoading(true);
-        axios.get("http://localhost:3000/api/auth/me", {
+        axios.get("http://localhost:3000/api/users/me", {
             withCredentials: true,
         })
             .then(res => {
@@ -25,7 +25,7 @@ export function UserProvider({children}) {
     }, [])
 
     function register(data, onSuccess, onError, onEnd) {
-        axios.post("http://localhost:3000/api/auth/register", data, {withCredentials: true})
+        axios.post("http://localhost:3000/api/users/register", data, {withCredentials: true})
             .then(res => {
                 if (onSuccess) onSuccess(res);
             })
@@ -38,7 +38,7 @@ export function UserProvider({children}) {
     }
 
     function login(data, onSuccess, onError, onEnd) {
-        axios.post("http://localhost:3000/api/auth/login", data, {withCredentials: true})
+        axios.post("http://localhost:3000/api/users/login", data, {withCredentials: true})
             .then(res => {
                 setUser(res.data.data);
                 if (onSuccess) onSuccess(res);
@@ -52,7 +52,7 @@ export function UserProvider({children}) {
     }
 
     function logout() {
-        axios.post("http://localhost:3000/api/auth/logout", {}, {withCredentials: true})
+        axios.post("http://localhost:3000/api/users/logout", {}, {withCredentials: true})
             .then(res => {
                 setUser(null);
             });
@@ -62,6 +62,7 @@ export function UserProvider({children}) {
         <UserContext.Provider value={{
             loading,
             user,
+            setUser,
             register,
             login,
             logout,

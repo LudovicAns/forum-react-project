@@ -1,4 +1,4 @@
-import {loginValidation, registerValidation} from "../validation/User.js";
+import {loginValidation, registerValidation, updateValidation} from "../validation/User.js";
 import {UserRepository} from "../model/dao/repository/UserRepository.js";
 import JwtService from "./JwtService.js";
 
@@ -75,8 +75,48 @@ export const UserService = {
 
     },
 
-    update: async function () {
+    update: async function (id, data) {
+        if (!id) {
+            throw new Error('Id is required');
+        }
 
+        if (!data) {
+            throw new Error('Data is required');
+        }
+
+        const validation = updateValidation(data);
+
+        if (!validation.success) {
+            throw new Error(`Field '${validation.error.issues[0].path[0]}' : ${validation.error.issues[0].message}`);
+        }
+
+        let user = await UserRepository.getById(id);
+
+        if (!user) {
+            throw new Error('User not found');
+        }
+
+        if (data.description) {
+            user.description = data.description;
+        }
+
+        if (data.avatar) {
+            user.avatar = data.avatar;
+        }
+
+        if (data.username) {
+            user.username = data.username;
+        }
+
+        if (data.email) {
+            user.email = data.email;
+        }
+
+        if (data.password) {
+            user.password = data.password;
+        }
+
+        return await UserRepository.update(id, user);
     },
 
     delete: async function () {
