@@ -12,8 +12,14 @@ export default function (req, res, next) {
     const jwt = JwtService.verify(cookies.access_token);
 
     if (!jwt.success) {
-        res.status(401).json({
+        return res.status(401).json({
             message: jwt.message
+        });
+    }
+
+    if (!jwt.payload || !jwt.payload.id) {
+        return res.status(401).json({
+            message: "Invalid access_token payload."
         });
     }
 

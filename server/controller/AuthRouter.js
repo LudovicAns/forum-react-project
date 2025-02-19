@@ -45,7 +45,7 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/logout", async (req, res) => {
-    res.clearCookie('access_token').status(200).json({
+    return res.clearCookie('access_token').status(200).json({
         message: "Déconnexion réussie"
     });
 })
@@ -57,7 +57,7 @@ router.get("/me", Auth, async (req, res) => {
 
     user = userDto(user);
 
-    res.status(200).json({
+    return res.status(200).json({
         message: "Informations utilisateur récupérées",
         data: user
     })
