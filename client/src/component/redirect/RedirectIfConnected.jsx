@@ -5,7 +5,7 @@ import {Navigate} from "react-router";
 function RedirectIfConnected({children, to}) {
     const userContext = useContext(UserContext);
 
-    console.log(userContext.user);
+    if (userContext.loading) return <></>;
 
     if (userContext.user) {
         return <Navigate to={to} replace />
