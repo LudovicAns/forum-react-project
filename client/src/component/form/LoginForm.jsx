@@ -8,6 +8,7 @@ import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {loginSchema} from "../../validation/User.js";
 import {UserContext} from "../../context/UserContextProvider.jsx";
+import {Checkbox, CheckboxField} from "../catalyst-ui/checkbox.jsx";
 
 function LoginForm() {
 
@@ -62,6 +63,10 @@ function LoginForm() {
                         <Input invalid={!!errors.password} name={"password"} type={"password"} {...register("password")} />
                         <ErrorMessage>{errors.password?.message}</ErrorMessage>
                     </Field>
+                    <CheckboxField>
+                        <Checkbox name={"rememberMe"} {...register("rememberMe")}/>
+                        <Label>Se souvenir de moi</Label>
+                    </CheckboxField>
                     <Divider/>
                     <Button className={"w-full"} type={"submit"}>Connexion</Button>
                     {(requestInfo.init && !requestInfo.success) &&

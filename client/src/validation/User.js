@@ -16,7 +16,8 @@ export function registerValidation(data) {
 
 export const loginSchema = z.object({
     email: z.string().email("L'adresse email est invalide."),
-    password: z.string().min(8, {message: "Le mot de passe doit contenir au minimum 8 caractères."})
+    password: z.string().min(8, {message: "Le mot de passe doit contenir au minimum 8 caractères."}),
+    rememberMe: z.boolean().optional()
 });
 
 export function loginValidation(data) {
