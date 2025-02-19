@@ -49,7 +49,6 @@ function ProfilWidget({className}) {
                         :
                         <Text>{userContext.user.description}</Text>
                 }
-                <Text>{userContext.user.description}</Text>
             </div>
         </div>
     );
