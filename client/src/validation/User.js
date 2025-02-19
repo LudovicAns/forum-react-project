@@ -23,3 +23,12 @@ export const loginSchema = z.object({
 export function loginValidation(data) {
     return loginSchema.safeParse(data);
 }
+
+export const editProfileSchema = z.object({
+    avatar: z.any().optional(),
+    description: z.string().optional()
+})
+
+export function editProfileValidation(data) {
+    return editProfileSchema.safeParse(data);
+}
