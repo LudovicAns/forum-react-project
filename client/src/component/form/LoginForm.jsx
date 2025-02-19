@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {ErrorMessage, Field, FieldGroup, Fieldset, Label, Legend} from "../catalyst-ui/fieldset.jsx";
 import {Input} from "../catalyst-ui/input.jsx";
 import {Button} from "../catalyst-ui/button.jsx";
-import {Text} from "../catalyst-ui/text.jsx";
+import {Text, TextLink} from "../catalyst-ui/text.jsx";
 import {Divider} from "../catalyst-ui/divider.jsx";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
@@ -75,6 +75,8 @@ function LoginForm() {
                         <Text className={"text-center"}>{requestInfo.message}</Text>}
                 </FieldGroup>
             </Fieldset>
+            <Divider className={"mt-8 mb-4"}/>
+            <Text className={"text-center"}>Vous n'avez pas encore de compte ? <TextLink href={"/register"}>Cliquez ici</TextLink></Text>
         </form>
     );
 }
