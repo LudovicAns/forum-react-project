@@ -27,8 +27,10 @@ function ProfileEditForm({className}) {
 
     function onSubmit(data) {
         axios.post("/api/user/edit", data, {withCredentials: true})
-            .then(res => {})
-            .catch(err => {})
+            .then(res => {
+            })
+            .catch(err => {
+            })
             .finally(() => reset())
     }
 
@@ -48,6 +50,7 @@ function ProfileEditForm({className}) {
                                {...register("avatar")}
                                type={"file"}
                                multiple={false}
+                               className={"max-w-md"}
                                accept={"image/png, image/jpeg"}/>
                         <ErrorMessage>{errors.avatar?.message}</ErrorMessage>
                     </Field>
@@ -57,6 +60,7 @@ function ProfileEditForm({className}) {
                         <Textarea name={"description"}
                                   invalid={!!errors.description}
                                   {...register("description")}
+                                  rows={5}
                                   placeholder={"Je m'appelle John, développeur passionné depuis mon plus jeune âge !"}
                                   defaultValue={userContext.user.description}/>
                     </Field>
