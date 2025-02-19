@@ -85,8 +85,7 @@ function RegisterForm(props) {
                     {(requestInfo.init && requestInfo.success) && <Text className={"text-center"}>{requestInfo.message}</Text>}
                 </FieldGroup>
             </Fieldset>
-            <Divider className={"mt-8 mb-4"}/>
-            <Text className={"text-center"}>Vous avez déjà un compte ? <TextLink href={"/login"}>Cliquez ici</TextLink></Text>
+            <Text className={"mt-4 text-center"}>Vous avez déjà un compte ? <TextLink href={"/login"}>Cliquez ici</TextLink></Text>
         </form>
     );
 }
