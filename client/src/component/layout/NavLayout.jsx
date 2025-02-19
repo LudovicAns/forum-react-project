@@ -53,15 +53,20 @@ function NavLayout() {
 
     const avatarUrl = !userContext.loading && userContext.user?.avatar ? import.meta.env.VITE_BACKEND_HOST + userContext.user.avatar : "";
 
-    function UserDropDown() {
+    function UserDropDown(navbar) {
         if (userContext.loading) return (<></>)
         return (
             <Dropdown>
-                <DropdownButton as={NavbarItem}>
+                <DropdownButton as={navbar ? NavbarItem : SidebarItem}>
                     <Avatar src={avatarUrl}
                             initials={userContext.user.username[0]}
                             className={"bg-zinc-900 text-white dark:bg-white dark:text-black"}/>
-                    <NavbarLabel>{userContext.user.username}</NavbarLabel>
+                    {
+                        navbar ?
+                            <NavbarLabel>{userContext.user.username}</NavbarLabel>
+                            :
+                            <SidebarLabel>{userContext.user.username}</SidebarLabel>
+                    }
                     <ChevronDownIcon />
                 </DropdownButton>
                 <DropdownMenu>
@@ -101,7 +106,7 @@ function NavLayout() {
             <>
                 <SidebarItem href="/login" current={location.pathname === '/login'}>
                     <ArrowRightEndOnRectangleIcon/>
-                    <NavbarLabel>Connexion</NavbarLabel>
+                    <SidebarLabel>Connexion</SidebarLabel>
                 </SidebarItem>
                 <SidebarItem href="/register" current={location.pathname === '/register'}>
                     <UserPlusIcon/>
@@ -130,7 +135,7 @@ function NavLayout() {
                 <NavbarDivider className={`max-lg:hidden`}/>
                 <NavbarSection className={`max-lg:hidden`}>
                     {
-                        userContext.user ? UserDropDown() : AuthNavbarComponent()
+                        userContext.user ? UserDropDown(true) : AuthNavbarComponent()
                     }
                 </NavbarSection>
                 <NavbarDivider/>
@@ -158,7 +163,7 @@ function NavLayout() {
                 </SidebarBody>
                 <SidebarFooter>
                     {
-                        userContext.user ? UserDropDown() : AuthSidebarComponent()
+                        userContext.user ? UserDropDown(false) : AuthSidebarComponent()
                     }
                 </SidebarFooter>
             </Sidebar>
