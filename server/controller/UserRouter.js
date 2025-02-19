@@ -89,4 +89,27 @@ router.post("/edit", Auth, async (req, res) => {
     });
 })
 
+router.get("/:id", async (req, res) => {
+    const userId = req.params.id;
+
+    UserService.getById(userId)
+        .then(user => {
+            if (!user) {
+                return res.status(204).json({
+                    message: "Utilisateur introuvable"
+                });
+            }
+
+            return res.status(200).json({
+                message: "Utilisateur récupéré avec succès.",
+                data: userDto(user)
+            })
+        })
+        .catch(error => {
+            return res.status(400).json({
+                message: error.message,
+            })
+        })
+})
+
 export default router;

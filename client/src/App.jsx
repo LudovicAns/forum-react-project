@@ -10,6 +10,7 @@ import RedirectIfNotConnected from "./component/redirect/RedirectIfNotConnected.
 import Profile from "./component/page/Profile.jsx";
 import ProfileEdit from "./component/page/ProfileEdit.jsx";
 import Error404 from "./component/page/Error404.jsx";
+import PublicProfile from "./component/page/PublicProfile.jsx";
 
 function App() {
 
@@ -29,11 +30,12 @@ function App() {
                         <Profile/>
                     </RedirectIfNotConnected>
                 }/>
-                <Route path={"profile/:username"} element={
+                <Route path={"profile/edit"} element={
                     <RedirectIfNotConnected>
                         <ProfileEdit/>
                     </RedirectIfNotConnected>
                 }/>
+                <Route path={"profile/:userId"} element={<PublicProfile/>}/>
 
                 <Route path="forum" element={<Forum/>}/>
 

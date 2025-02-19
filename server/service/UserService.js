@@ -71,8 +71,12 @@ export const UserService = {
 
     },
 
-    getById: async function () {
+    getById: async function (id) {
+        if (!id) {
+            throw new Error('Id is required');
+        }
 
+        return await UserRepository.getById(id);
     },
 
     update: async function (id, data) {

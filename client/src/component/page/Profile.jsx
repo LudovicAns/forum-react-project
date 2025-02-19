@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {Heading, Subheading} from "../catalyst-ui/heading.jsx";
 import {Strong, Text} from "../catalyst-ui/text.jsx";
 import {UserContext} from "../../context/UserContextProvider.jsx";
-import ProfilWidget from "../widget/ProfilWidget.jsx";
+import ProfileWidget from "../widget/ProfileWidget.jsx";
 import {Button} from "../catalyst-ui/button.jsx";
 import {Badge} from "../catalyst-ui/badge.jsx";
 import {Divider} from "../catalyst-ui/divider.jsx";
@@ -19,7 +19,7 @@ function Profile() {
                 <Heading>Profile</Heading>
                 <Text>Votre page de profil vous permet de consulter les informations visible par les autres
                     utilisateurs.</Text>
-                <ProfilWidget className={"mt-4"}/>
+                <ProfileWidget className={"mt-4"} user={userContext.user}/>
 
                 <Subheading className={"mt-4"}>Modification</Subheading>
                 <Text className={"mb-4"}>Vous pouvez modifier votre profil en cliquant sur le bouton ci-dessous.</Text>
