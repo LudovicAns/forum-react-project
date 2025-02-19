@@ -36,3 +36,7 @@ const updateSchema = z.object({
     avatar: z.string().optional(),
     description: z.string().optional(),
 });
+
+export function updateValidation(data) {
+    return updateSchema.safeParse(data);
+}
