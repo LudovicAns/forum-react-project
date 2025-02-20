@@ -10,7 +10,7 @@ const createSchemaValidation = z.object({
     author: z.string()
         .refine(value => mongoose.Types.ObjectId.isValid(value), INVALID_MONGOOSE_OBJECT_ID)
         .refine(async (value) => {
-            if (!await UserRepository.getById(value)) {
+            if (await UserRepository.getById(value) === null) {
                 return false;
             }
             return true;
