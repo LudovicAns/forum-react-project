@@ -90,7 +90,7 @@ function Forum(props) {
             <div
                 className={"flex flex-col gap-4 [&>*]:border [&>*]:border-zinc-950/10 [&>*]:dark:border-white/10 [&>*]:rounded-md [&>*]:p-8"}>
                 <div className={"flex flex-col gap-2"}>
-                    <Subheading>Pour vous</Subheading>
+                    <Subheading className={"mb-4"}>Pour vous</Subheading>
                     <TextLink className={"w-full flex flex-row gap-2 items-center !no-underline"} outline={true} href={"/forum/posts"}>
                         <ArchiveBoxIcon className={"size-[20px] inline"}/>
                         Vos posts
