@@ -28,11 +28,11 @@ const createSchemaValidation = z.object({
 });
 
 export function createPostValidation(data) {
-    createSchemaValidation.safeParse(data);
+    return createSchemaValidation.safeParse(data);
 };
 
 export function updatePostValidation(data) {
-    createSchemaValidation.safeParse(data);
+    return createSchemaValidation.safeParse(data);
 };
 
 const getByIdSchemaValidation = z.object({
@@ -41,7 +41,7 @@ const getByIdSchemaValidation = z.object({
 });
 
 export function getByIdPostValidation(data) {
-    getByIdSchemaValidation.safeParse(data);
+    return getByIdSchemaValidation.safeParse(data);
 }
 
 const deleteByIdSchemaValidation = z.object({
@@ -50,5 +50,5 @@ const deleteByIdSchemaValidation = z.object({
 });
 
 export function deleteByIdPostValidation(data) {
-    deleteByIdSchemaValidation.safeParse(data);
+    return deleteByIdSchemaValidation.safeParse(data);
 }
