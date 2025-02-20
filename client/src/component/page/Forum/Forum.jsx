@@ -1,14 +1,14 @@
 import React from 'react';
-import PostCardList from "../widget/forum/PostCardList.jsx";
-import PostCard from "../widget/forum/PostCard.jsx";
-import {Button} from "../catalyst-ui/button.jsx";
+import PostCardList from "../../widget/forum/PostCardList.jsx";
+import PostCard from "../../widget/forum/PostCard.jsx";
+import {Button} from "../../catalyst-ui/button.jsx";
 import {ArchiveBoxIcon, ArrowPathIcon, PlusCircleIcon, StarIcon} from "@heroicons/react/20/solid/index.js";
-import {Subheading} from "../catalyst-ui/heading.jsx";
-import {Switch, SwitchField, SwitchGroup} from "../catalyst-ui/switch.jsx";
-import {Fieldset, Label, Legend} from "../catalyst-ui/fieldset.jsx";
-import {Text, TextLink} from "../catalyst-ui/text.jsx";
-import {Divider} from "../catalyst-ui/divider.jsx";
-import {Badge} from "../catalyst-ui/badge.jsx";
+import {Subheading} from "../../catalyst-ui/heading.jsx";
+import {Switch, SwitchField, SwitchGroup} from "../../catalyst-ui/switch.jsx";
+import {Fieldset, Label, Legend} from "../../catalyst-ui/fieldset.jsx";
+import {Text, TextLink} from "../../catalyst-ui/text.jsx";
+import {Divider} from "../../catalyst-ui/divider.jsx";
+import {Badge} from "../../catalyst-ui/badge.jsx";
 
 const posts = [
     {
