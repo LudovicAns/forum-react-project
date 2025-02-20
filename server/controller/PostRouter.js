@@ -26,7 +26,7 @@ router.get("/", async (req, res) => {
 
             return res.json({
                 message: "Posts récupérés avec succès.",
-                posts: posts
+                data: posts
             });
         })
         .catch(err => {
