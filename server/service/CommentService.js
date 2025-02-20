@@ -8,10 +8,6 @@ import {CommentRepository} from "../model/dao/repository/CommentRepository.js";
 
 export const CommentService = {
     addComment: async (data) => {
-        if (!data) {
-            throw new Error('No data provided');
-        }
-
         const validation = validateCreateComment(data);
 
         if (!validation) {

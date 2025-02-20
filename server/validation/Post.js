@@ -31,8 +31,28 @@ export function createPostValidation(data) {
     return createSchemaValidation.safeParse(data);
 };
 
+const updateSchemaValidation = z.object({
+    _id: z.string()
+        .refine(value => mongoose.Types.ObjectId.isValid(value), INVALID_ID_FORMAT),
+    title: z.string().min(3, INVALID_POST_TITLE_LENGTH),
+    content: z.string().min(50, INVALID_POST_CONTENT_LENGTH),
+    author: z.string()
+        .refine((value) => mongoose.Types.ObjectId.isValid(value), INVALID_ID_FORMAT)
+        .refine(async (value) => {
+            if (!await PostRepository.getById(value) === null) {
+                return false;
+            }
+            return true;
+        }, INVALID_AUTHOR_ID)
+        .optional(),
+    comments: [z.string()
+        .refine((value) => mongoose.Types.ObjectId.isValid(value), INVALID_ID_FORMAT)
+        .refine(async (value) => {}, INVALID_COMMENT_ID)]
+        .optional()
+});
+
 export function updatePostValidation(data) {
-    return createSchemaValidation.safeParse(data);
+    return updateSchemaValidation.safeParse(data);
 };
 
 const getByIdSchemaValidation = z.object({
