@@ -24,8 +24,10 @@ function Forum(props) {
     document.title = "Forum - Forum";
 
     const [posts, setPosts] = React.useState([]);
+    const [loading, setLoading] = React.useState(true);
 
     useEffect(() => {
+        setLoading(true);
         axios.get(`${import.meta.env.VITE_BACKEND_HOST}api/posts`, {withCredentials: true})
             .then(res => {
                 if (res.status === 204) return [];
@@ -34,6 +36,9 @@ function Forum(props) {
             })
             .catch(err => {
                 console.error(err);
+            })
+            .finally(() => {
+                setLoading(false);
             });
     }, []);
 
@@ -47,7 +52,8 @@ function Forum(props) {
                         <ArchiveBoxIcon className={"size-[20px] inline"}/>
                         Vos posts
                     </TextLink>
-                    <TextLink className={"w-full flex flex-row gap-2 items-center !no-underline"} href={"/forum/favorites"}>
+                    <TextLink className={"w-full flex flex-row gap-2 items-center !no-underline"}
+                              href={"/forum/favorites"}>
                         <StarIcon className={"fill-yellow-400 size-[20px] inline"}/>
                         Vos favoris
                     </TextLink>
@@ -81,7 +87,7 @@ function Forum(props) {
                 </div>
             </div>
             {
-                posts.length > 0 ?
+                posts.length > 0 && !loading && (
                     <PostCardList>
                         {
                             posts &&
@@ -92,13 +98,24 @@ function Forum(props) {
                             })
                         }
                     </PostCardList>
-                    :
+                )
+            }
+            {
+                posts.length === 0 && !loading && (
                     <div className={"flex flex-col gap-4 w-full justify-center items-center"}>
                         <Heading>Aucun post, soit le premier à poster !</Heading>
                         <div>
                             {newPostButton}
                         </div>
                     </div>
+                )
+            }
+            {
+                loading && (
+                    <div className={"flex flex-col gap-4 w-full justify-center items-center"}>
+                        <Heading>Chargement ...</Heading>
+                    </div>
+                )
             }
         </main>
     );
