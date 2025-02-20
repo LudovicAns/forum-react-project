@@ -31,7 +31,6 @@ function Forum(props) {
         axios.get(`${import.meta.env.VITE_BACKEND_HOST}api/posts`, {withCredentials: true})
             .then(res => {
                 if (res.status === 204) return [];
-                console.log(res.data.data);
                 setPosts(res.data.data);
             })
             .catch(err => {

@@ -5,7 +5,6 @@ import CreatePostForm from "../../form/forum/CreatePostForm.jsx";
 function NewPost(props) {
     return (
         <main>
-            <Heading>New Post</Heading>
             <CreatePostForm/>
         </main>
     );
