@@ -91,11 +91,11 @@ function Forum(props) {
                 className={"flex flex-col min-w-fit gap-4 [&>*]:border [&>*]:border-zinc-950/10 [&>*]:dark:border-white/10 [&>*]:rounded-md [&>*]:p-8"}>
                 <div className={"flex flex-col gap-2"}>
                     <Subheading className={"mb-4"}>Pour vous</Subheading>
-                    <TextLink className={"w-full flex flex-row gap-2 items-center !no-underline"} outline={true} href={"/forum/posts"}>
+                    <TextLink className={"w-full flex flex-row gap-2 items-center !no-underline"} href={"/forum/posts"}>
                         <ArchiveBoxIcon className={"size-[20px] inline"}/>
                         Vos posts
                     </TextLink>
-                    <TextLink className={"w-full flex flex-row gap-2 items-center !no-underline"} outline={true} href={"/forum/favorites"}>
+                    <TextLink className={"w-full flex flex-row gap-2 items-center !no-underline"} href={"/forum/favorites"}>
                         <StarIcon className={"fill-yellow-400 size-[20px] inline"}/>
                         Vos favoris
                     </TextLink>
