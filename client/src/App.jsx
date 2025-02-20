@@ -37,7 +37,11 @@ function App() {
                 }/>
                 <Route path={"profile/:userId"} element={<PublicProfile/>}/>
 
-                <Route path="forum" element={<Forum/>}/>
+                <Route path="forum" element={
+                    <RedirectIfNotConnected>
+                        <Forum/>
+                    </RedirectIfNotConnected>
+                }/>
 
                 <Route path="*" element={<Error404/>}/>
 
