@@ -19,7 +19,7 @@ router.post("/create", Auth, async (req, res) => {
         });
 });
 
-router.get("/", async (req, res) => {
+router.get("/", Auth, async (req, res) => {
     PostService.getPosts()
         .then(posts => {
             posts.length > 0 ? res.status(200) : res.status(204);
@@ -36,7 +36,7 @@ router.get("/", async (req, res) => {
         });
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", Auth, async (req, res) => {
     const postId = req.params.id;
 
     PostService.getPostById({ id: postId})
