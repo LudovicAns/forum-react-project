@@ -88,7 +88,7 @@ function Forum(props) {
     return (
         <main className={"flex flex-row max-lg:flex-col gap-4"}>
             <div
-                className={"flex flex-col gap-4 [&>*]:border [&>*]:border-zinc-950/10 [&>*]:dark:border-white/10 [&>*]:rounded-md [&>*]:p-8"}>
+                className={"flex flex-col min-w-fit gap-4 [&>*]:border [&>*]:border-zinc-950/10 [&>*]:dark:border-white/10 [&>*]:rounded-md [&>*]:p-8"}>
                 <div className={"flex flex-col gap-2"}>
                     <Subheading className={"mb-4"}>Pour vous</Subheading>
                     <TextLink className={"w-full flex flex-row gap-2 items-center !no-underline"} outline={true} href={"/forum/posts"}>
@@ -108,15 +108,15 @@ function Forum(props) {
                 <div>
                     <form>
                         <Fieldset>
-                            <Legend>Filtres</Legend>
+                            <Legend>Filtres {availableSoon}</Legend>
                             <Text>Affinez les posts à consulter.</Text>
                             <SwitchGroup>
                                 <SwitchField>
-                                    <Label>Plus Récent {availableSoon}</Label>
+                                    <Label>Plus Récent</Label>
                                     <Switch name={"filtre1"} defaultChecked={true} disabled/>
                                 </SwitchField>
                                 <SwitchField>
-                                    <Label>Plus Commenté {availableSoon}</Label>
+                                    <Label>Plus Commenté</Label>
                                     <Switch name={"filtre2"} defaultChecked={false} disabled/>
                                 </SwitchField>
                             </SwitchGroup>
