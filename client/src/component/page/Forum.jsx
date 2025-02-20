@@ -94,11 +94,11 @@ function Forum(props) {
                         <SwitchGroup>
                             <SwitchField>
                                 <Label>Plus Récent {availableSoon}</Label>
-                                <Switch name={"filtre1"} defaultChecked={true} />
+                                <Switch name={"filtre1"} defaultChecked={true} disabled />
                             </SwitchField>
                             <SwitchField>
                                 <Label>Plus Commenté {availableSoon}</Label>
-                                <Switch name={"filtre2"} defaultChecked={false} />
+                                <Switch name={"filtre2"} defaultChecked={false} disabled />
                             </SwitchField>
                         </SwitchGroup>
                     </Fieldset>
