@@ -20,7 +20,7 @@ function PostCard({post}) {
                 <Subheading>
                     {post.author.id === userContext.user.id && <Badge color={"red"}>Propriétaire</Badge>} {post.title}
                 </Subheading>
-                <TextLink target={"_blank"} href={`/profile/${post.author.id}`} className={"flex flex-row gap-2 !no-underline"}>
+                <TextLink href={`/profile/${post.author.id}`} className={"flex flex-row gap-2 !no-underline"}>
                     <Avatar className={"size-[24px] dark:bg-white dark:text-black bg-black text-white"} src={avatarUrl} initials={post.author.username[0]}/>
                     <Text className={"max-md:hidden text-zinc-950 dark:!text-white"}>{post.author.username}</Text>
                 </TextLink>

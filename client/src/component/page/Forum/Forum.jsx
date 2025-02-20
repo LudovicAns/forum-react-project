@@ -2,7 +2,14 @@ import React, {useEffect} from 'react';
 import PostCardList from "../../widget/forum/PostCardList.jsx";
 import PostCard from "../../widget/forum/PostCard.jsx";
 import {Button} from "../../catalyst-ui/button.jsx";
-import {ArchiveBoxIcon, ArrowPathIcon, PlusCircleIcon, StarIcon} from "@heroicons/react/20/solid/index.js";
+import {
+    ArchiveBoxIcon,
+    ArrowPathIcon,
+    FolderIcon,
+    GlobeAltIcon,
+    PlusCircleIcon,
+    StarIcon
+} from "@heroicons/react/20/solid/index.js";
 import {Heading, Subheading} from "../../catalyst-ui/heading.jsx";
 import {Switch, SwitchField, SwitchGroup} from "../../catalyst-ui/switch.jsx";
 import {Fieldset, Label, Legend} from "../../catalyst-ui/fieldset.jsx";
@@ -10,6 +17,7 @@ import {Text, TextLink} from "../../catalyst-ui/text.jsx";
 import {Divider} from "../../catalyst-ui/divider.jsx";
 import {Badge} from "../../catalyst-ui/badge.jsx";
 import axios from "axios";
+import {Radio, RadioField, RadioGroup} from "../../catalyst-ui/radio.jsx";
 
 const availableSoon = (<Badge color={"yellow"}>Bientôt disponible</Badge>);
 
@@ -46,16 +54,34 @@ function Forum(props) {
             <div
                 className={"flex flex-col min-w-fit gap-4 [&>*]:border [&>*]:border-zinc-950/10 [&>*]:dark:border-white/10 [&>*]:rounded-md [&>*]:p-8"}>
                 <div className={"flex flex-col gap-2"}>
-                    <Subheading className={"mb-4"}>Pour vous</Subheading>
-                    <TextLink className={"w-full flex flex-row gap-2 items-center !no-underline"} href={"/forum/posts"}>
-                        <ArchiveBoxIcon className={"size-[20px] inline"}/>
-                        Vos posts
-                    </TextLink>
-                    <TextLink className={"w-full flex flex-row gap-2 items-center !no-underline"}
-                              href={"/forum/favorites"}>
-                        <StarIcon className={"fill-yellow-400 size-[20px] inline"}/>
-                        Vos favoris
-                    </TextLink>
+                    <form>
+                        <Fieldset>
+                            <Legend>Post à afficher</Legend>
+                            <RadioGroup name={"post-type"} defaultValue={"all"}>
+                                <RadioField>
+                                    <Label className={"w-full flex flex-row gap-2 items-center"}>
+                                        <GlobeAltIcon className={"size-[20px] inline"}/>
+                                        Tous les posts
+                                    </Label>
+                                    <Radio value={"all"}/>
+                                </RadioField>
+                                <RadioField disabled={true}>
+                                    <Label className={"w-full flex flex-row gap-2 items-center"}>
+                                        <FolderIcon className={"size-[20px] inline"}/>
+                                        Vos post
+                                    </Label>
+                                    <Radio value={"user"}/>
+                                </RadioField>
+                                <RadioField disabled={true}>
+                                    <Label className={"w-full flex flex-row gap-2 items-center"}>
+                                        <StarIcon className={"fill-yellow-400 size-[20px] inline"}/>
+                                        Vos favoris
+                                    </Label>
+                                    <Radio value={"favorites"}/>
+                                </RadioField>
+                            </RadioGroup>
+                        </Fieldset>
+                    </form>
                     <Divider className={"my-4"}/>
                     {newPostButton}
                 </div>
