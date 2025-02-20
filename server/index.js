@@ -1,13 +1,11 @@
 import express from 'express';
 import 'dotenv/config'
 import {connect as connectMongoDB} from "./model/database/MongoDB.js";
-import AuthRouter from "./controller/UserRouter.js";
+import UserRouter from "./controller/UserRouter.js";
+import PostRouter from "./controller/PostRouter.js";
 import logger from "./middleware/Logger.js";
 import cors from 'cors';
 import cookieParser from "cookie-parser";
-import multer from "multer";
-import path from "path";
-import UserRouter from "./controller/UserRouter.js";
 
 const app = express();
 const PORT = process.env.APP_PORT;
@@ -41,5 +39,6 @@ connectMongoDB()
     });
 
 app.use("/api/users", UserRouter);
+app.use("/api/posts", PostRouter);
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

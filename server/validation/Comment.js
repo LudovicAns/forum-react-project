@@ -9,8 +9,8 @@ const INVALID_CONTENT_LENGTH = "Le contenu doit contenir au minimul 10 caractèr
 const createSchemaValidation = z.object({
     author: z.string()
         .refine(value => mongoose.Types.ObjectId.isValid(value), INVALID_MONGOOSE_OBJECT_ID)
-        .refine(async (value) => {
-            if (await UserRepository.getById(value) === null) {
+        .refine((value) => {
+            if (UserRepository.getById(value) === null) {
                 return false;
             }
             return true;
@@ -27,8 +27,8 @@ const updateSchemaValidation = z.object({
         .refine(value => mongoose.Types.ObjectId.isValid(value), INVALID_MONGOOSE_OBJECT_ID),
     author: z.string()
         .refine(value => mongoose.Types.ObjectId.isValid(value), INVALID_MONGOOSE_OBJECT_ID)
-        .refine(async (value) => {
-            if (await UserRepository.getById(value) === null) {
+        .refine((value) => {
+            if (UserRepository.getById(value) === null) {
                 return false;
             }
             return true;

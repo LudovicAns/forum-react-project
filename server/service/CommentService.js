@@ -10,7 +10,7 @@ export const CommentService = {
     addComment: async (data) => {
         const validation = validateCreateComment(data);
 
-        if (!validation) {
+        if (!validation.success) {
             throw new Error(`Field '${validation.error.issues[0].path[0]}' : ${validation.error.issues[0].message}`);
         }
 
@@ -24,7 +24,7 @@ export const CommentService = {
     getCommentById: async (data) => {
         const validation = validateGetByIdComment(data);
 
-        if (!validation) {
+        if (!validation.success) {
             throw new Error(`Field '${validation.error.issues[0].path[0]}' : ${validation.error.issues[0].message}`);
         }
 
@@ -34,7 +34,7 @@ export const CommentService = {
     updateComment: async (data) => {
         const validation = validateUpdateComment(data);
 
-        if (!validation) {
+        if (!validation.success) {
             throw new Error(`Field '${validation.error.issues[0].path[0]}' : ${validation.error.issues[0].message}`);
         }
 
@@ -44,7 +44,7 @@ export const CommentService = {
     deleteComment: async (data) => {
         const validation = validateDeleteByIdComment(data);
 
-        if (!validation) {
+        if (!validation.success) {
             throw new Error(`Field '${validation.error.issues[0].path[0]}' : ${validation.error.issues[0].message}`);
         }
 

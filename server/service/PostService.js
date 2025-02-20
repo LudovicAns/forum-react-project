@@ -10,7 +10,7 @@ export const PostService = {
     addPost: async (data) => {
         const validation = createPostValidation(data);
 
-        if (!validation) {
+        if (!validation.success) {
             throw new Error(`Field '${validation.error.issues[0].path[0]}' : ${validation.error.issues[0].message}`);
         }
 
@@ -24,7 +24,7 @@ export const PostService = {
     getPostById: async (data) => {
         const validation = getByIdPostValidation(data);
 
-        if (!validation) {
+        if (!validation.success) {
             throw new Error(`Field '${validation.error.issues[0].path[0]}' : ${validation.error.issues[0].message}`);
         }
 
@@ -34,7 +34,7 @@ export const PostService = {
     updatePost: async (data) => {
         const validation = updatePostValidation(data);
 
-        if (!validation) {
+        if (!validation.success) {
             throw new Error(`Field '${validation.error.issues[0].path[0]}' : ${validation.error.issues[0].message}`);
         }
 
@@ -44,7 +44,7 @@ export const PostService = {
     deletePost: async (data) => {
         const validation = deleteByIdPostValidation(data);
 
-        if (!validation) {
+        if (!validation.success) {
             throw new Error(`Field '${validation.error.issues[0].path[0]}' : ${validation.error.issues[0].message}`);
         }
 

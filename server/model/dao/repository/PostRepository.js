@@ -1,4 +1,21 @@
 import {Post} from "../entity/Post.js";
+import {userDto} from "../../dto/User.js";
+
+const populatePost = [
+    {
+        path: 'author',
+        transform: (doc, id) => userDto(doc)
+    },
+    {
+        path: 'comments',
+        transform: (doc, id) => {
+            return {
+                ...doc,
+                author: userDto(doc.author)
+            }
+        }
+    }
+];
 
 export const PostRepository = {
     create: async function (post) {
@@ -8,21 +25,21 @@ export const PostRepository = {
 
     getById: async function (id) {
         try {
-            return await Post.findOne({_id: id});
+            return await Post.findOne({_id: id}).populate(populatePost).exec();
         } catch (error) {
             return null;
         }
     },
 
     getAll: async function () {
-        return await Post.find();
+        return await Post.find().populate(populatePost).exec();
     },
 
     updateById: async function (id, newPost) {
-        return await Post.findByIdAndUpdate(id, newPost, {new: true});
+        return await Post.findByIdAndUpdate(id, newPost, {new: true}).populate(populatePost).exec();
     },
 
     deleteById: async function (id) {
-        return await Post.findByIdAndDelete(id);
+        return await Post.findByIdAndDelete(id).populate(populatePost).exec();
     }
 };
