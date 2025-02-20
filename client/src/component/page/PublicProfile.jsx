@@ -10,10 +10,20 @@ import {ArrowUturnLeftIcon} from "@heroicons/react/16/solid/index.js";
 function PublicProfile() {
 
     const [loading, setLoading] = React.useState(true);
+
     const [error, setError] = React.useState(null);
     const [user, setUser] = React.useState(null);
-
     const {userId} = useParams();
+
+    useEffect(() => {
+        if (user) {
+            document.title = `Forum - Profil de ${user.username}`;
+        } else if (!user && !loading) {
+            document.title = "Forum - Profil introuvable";
+        } else {
+            document.title = "Forum - Profil";
+        }
+    }, [user, loading])
 
     function fetchUser() {
         setLoading(true);
