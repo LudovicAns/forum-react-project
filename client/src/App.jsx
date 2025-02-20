@@ -11,12 +11,15 @@ import Profile from "./component/page/Profile.jsx";
 import ProfileEdit from "./component/page/ProfileEdit.jsx";
 import Error404 from "./component/page/Error404.jsx";
 import PublicProfile from "./component/page/PublicProfile.jsx";
+import AppLayout from "./component/layout/AppLayout.jsx";
 
 function App() {
 
     return (
         <Routes>
-            <Route element={<NavLayout/>}>
+            <Route element={<AppLayout>
+                <NavLayout/>
+            </AppLayout>}>
 
                 <Route index element={<Home/>}/>
 

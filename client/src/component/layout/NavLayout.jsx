@@ -31,6 +31,7 @@ import {
     DropdownLabel,
     DropdownMenu
 } from "../catalyst-ui/dropdown.jsx";
+import Footer from "../widget/Footer.jsx";
 
 const navItems = [
     {
@@ -169,6 +170,7 @@ function NavLayout() {
             </Sidebar>
         }>
             <Outlet/>
+            <Footer/>
         </StackedLayout>
     );
 }

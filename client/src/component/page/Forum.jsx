@@ -84,6 +84,7 @@ const availableSoon = <Badge color={"yellow"}>Bientôt disponible</Badge>;
 
 function Forum(props) {
     document.title = "Forum - Forum";
+
     return (
         <main className={"flex flex-row max-lg:flex-col gap-4"}>
             <div className={"flex flex-col justify-between w-xs h-fit min-h-124 max-lg:min-h-0 max-lg:w-full border border-zinc-950/10 dark:border-white/10 rounded-md p-8"}>
