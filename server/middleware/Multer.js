@@ -7,6 +7,7 @@ import JwtService from "../service/JwtService.js";
 
 const avatarDirectory = "public/avatars/";
 
+
 function deleteOldAvatar(userId, req, file, cb) {
     fs.readdir(avatarDirectory, (err, files) => {
         if (err) {
@@ -37,7 +38,9 @@ const avatarDiskStorage = multer.diskStorage({
 
         deleteOldAvatar(userId, req, file, cb);
 
-        cb(null, `${userId}-${new Date(Date.now()).toISOString()}${path.extname(file.originalname)}`);
+        const cleanTimestamp = new Date(Date.now()).toISOString().replace(/:/g, "-");
+
+        cb(null, `${userId}-${cleanTimestamp}${path.extname(file.originalname)}`);
     }
 });
 
