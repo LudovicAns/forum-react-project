@@ -3,6 +3,8 @@ import path from "path";
 import fs from "fs";
 import JwtService from "../service/JwtService.js";
 
+// todo : use cloud for better perf (ex: uploadthing aws s3).
+
 const avatarDirectory = "public/avatars/";
 
 function deleteOldAvatar(userId, req, file, cb) {
