@@ -12,6 +12,8 @@ function PostCard({post}) {
 
     const userContext = useContext(UserContext);
 
+    const avatarUrl = post.author.avatar ? `${import.meta.env.VITE_BACKEND_HOST}${post.author.avatar}` : null;
+
     return (
         <div className={"flex flex-col gap-2 w-full h-fit border border-zinc-950/10 dark:border-white/10 rounded-md p-8"}>
             <div className={"flex flex-row gap-2 justify-between"}>
@@ -19,7 +21,7 @@ function PostCard({post}) {
                     {post.author.id === userContext.user.id && <Badge color={"red"}>Propriétaire</Badge>} {post.title}
                 </Subheading>
                 <TextLink target={"_blank"} href={`/profile/${post.author.id}`} className={"flex flex-row gap-2 !no-underline"}>
-                    <Avatar className={"size-[24px] dark:bg-white dark:text-black bg-black text-white"} src={`${import.meta.env.VITE_BACKEND_HOST}${post.author.avatar}`} initials={"A"}/>
+                    <Avatar className={"size-[24px] dark:bg-white dark:text-black bg-black text-white"} src={avatarUrl} initials={post.author.username[0]}/>
                     <Text className={"max-md:hidden text-zinc-950 dark:!text-white"}>{post.author.username}</Text>
                 </TextLink>
             </div>
