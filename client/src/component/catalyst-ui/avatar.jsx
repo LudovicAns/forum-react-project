@@ -13,7 +13,7 @@ export function Avatar({ src = null, square = false, initials, alt = '', classNa
         className,
         // Basic layout
         'inline-grid shrink-0 align-middle [--avatar-radius:20%] [--ring-opacity:20%] *:col-start-1 *:row-start-1',
-        'outline -outline-offset-1 outline-black/(--ring-opacity) dark:outline-white/(--ring-opacity)',
+        'outline -outline-offset-1 outline-black/(--ring-opacity) dark:outline-white/(--ring-opacity) overflow-hidden',
         // Add the correct border radius
         square ? 'rounded-(--avatar-radius) *:rounded-(--avatar-radius)' : 'rounded-full *:rounded-full'
       )}
