@@ -30,7 +30,7 @@ router.post("/login", async (req, res) => {
                     httpOnly: true,
                     secure: false,
                     sameSite: "Lax",
-                    maxAge: 60*60*24*1000,
+                    maxAge: parseInt(process.env.USER_AUTH_EXPIRES_IN),
                 })
                 .status(200)
                 .json({
