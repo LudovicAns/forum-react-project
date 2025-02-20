@@ -44,7 +44,7 @@ function App() {
                 <Route path={"profile/:userId"} element={<PublicProfile/>}/>
 
                 <Route path="forum" element={
-                    <RedirectIfNotConnected>
+                    <RedirectIfNotConnected stayOnPage={true}>
                         <Forum/>
                     </RedirectIfNotConnected>
                 }/>
