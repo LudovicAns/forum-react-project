@@ -19,7 +19,7 @@ function PostCard({post}) {
                 <Subheading>
                     {post.author.id === userContext.user.id && <Badge color={"red"}>Propriétaire</Badge>} {post.title}
                 </Subheading>
-                <UserAvatarWidget user={userContext.user} />
+                <UserAvatarWidget user={post.author} />
             </div>
             <div className={"h-12 max-h-12"}>
                 <Text className={"h-full overflow-hidden"}>{post.content}</Text>
