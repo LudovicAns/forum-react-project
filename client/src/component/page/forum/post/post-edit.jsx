@@ -11,6 +11,8 @@ function PostEdit() {
         isLoading: isPostLoading,
     } = useContext(PostContext);
 
+    document.title = "Posts - Edition";
+
     return (
         <main>
             {

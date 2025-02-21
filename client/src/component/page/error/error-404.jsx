@@ -4,8 +4,9 @@ import {Text} from "../../catalyst-ui/text.jsx";
 import {Button} from "../../catalyst-ui/button.jsx";
 import {ArrowUturnLeftIcon} from "@heroicons/react/16/solid/index.js";
 
-function Error404(props)
-{
+function Error404(props) {
+    document.title = "Forum - Erreur 404";
+
     return (
         <main className={"w-full flex justify-center mt-12 0 text-center"}>
             <div className={"flex flex-col gap-2"}>

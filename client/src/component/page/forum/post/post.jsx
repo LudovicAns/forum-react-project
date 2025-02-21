@@ -35,6 +35,8 @@ function Post(props) {
 
     if (post === null) return null;
 
+    document.title = "Forum - " + post.title;
+
     const isOwner = userContext.user.id === post?.author.id;
 
     function onDeletePost() {
