@@ -1,18 +1,35 @@
 import express from "express";
 import {PostService} from "../service/PostService.js";
 import Auth from "../middleware/Auth.js";
+import mongoose from "mongoose";
 
 const router = express.Router();
 
-function CheckIsPostAuthor(req, res, next) {
+async function CheckIsPostAuthor(req, res, next) {
     const userId = res.locals.id;
     const postId = req.params.id;
 
-    if (userId === postId) {
+    try {
+        const post = await PostService.getPostById({id: postId});
+
+        if (!post) {
+            return res.status(204).json({
+                message: "Post introuvable."
+            });
+        }
+
+        console.log(post.author.id)
+        console.log(new mongoose.Types.ObjectId(userId))
+
+        if (post.author.id.toString() !== userId) {
+            return res.status(401).json({
+                message: "Vous devez être l'auteur du post pour effectuer cette action."
+            });
+        }
         return next();
-    } else {
-        return res.status(401).json({
-            message: "Vous devez être l'auteur du post pour effectuer cette action."
+    } catch (error) {
+        return res.status(400).json({
+            message: error.message,
         });
     }
 }
@@ -52,7 +69,7 @@ router.get("/", Auth, async (req, res) => {
 router.get("/:id", Auth, async (req, res) => {
     const postId = req.params.id;
 
-    PostService.getPostById({ id: postId})
+    PostService.getPostById({id: postId})
         .then(post => {
             if (post === null) {
                 return res.status(204).json({
@@ -75,7 +92,7 @@ router.get("/:id", Auth, async (req, res) => {
 router.delete("/:id", Auth, CheckIsPostAuthor, async (req, res) => {
     const postId = req.params.id;
 
-    PostService.deletePost({ id: postId})
+    PostService.deletePost({id: postId})
         .then((data) => {
             if (data === null) {
                 return res.status(204).json({

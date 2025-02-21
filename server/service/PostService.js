@@ -1,6 +1,6 @@
 import {
     createPostValidation,
-    deleteByIdPostValidation,
+    deleteByIdPostValidation, getByIdAndUserIdPostValidation,
     getByIdPostValidation,
     updatePostValidation
 } from "../validation/Post.js";
@@ -29,6 +29,16 @@ export const PostService = {
         }
 
         return await PostRepository.getById(data.id);
+    },
+
+    getPostByIdAndUserId: async (data) => {
+        const validation = getByIdAndUserIdPostValidation(data);
+
+        if (!validation.success) {
+            throw new Error(`Field '${validation.error.issues[0].path[0]}' : ${validation.error.issues[0].message}`);
+        }
+
+        return await PostRepository.getByIdAndUserId(data.id, data.userId);
     },
 
     updatePost: async (data) => {

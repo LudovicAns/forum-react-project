@@ -31,6 +31,17 @@ export const PostRepository = {
         }
     },
 
+    getByIdAndUserId: async function (id, userId) {
+        try {
+            return await Post.findOne({
+                _id: id,
+                author: userId
+            }).populate(populatePost).exec();
+        } catch (error) {
+            return null;
+        }
+    },
+
     getAll: async function () {
         return await Post.find().populate(populatePost).exec();
     },

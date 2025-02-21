@@ -77,6 +77,17 @@ export function getByIdPostValidation(data) {
     return getByIdSchemaValidation.safeParse(data);
 }
 
+const getByIdAndUserIdSchemaValidation = z.object({
+    id: z.string()
+        .refine(value => mongoose.Types.ObjectId.isValid(value), INVALID_ID_FORMAT),
+    userId: z.string()
+        .refine(value => mongoose.Types.ObjectId.isValid(value), INVALID_ID_FORMAT)
+});
+
+export function getByIdAndUserIdPostValidation(data) {
+    return getByIdAndUserIdSchemaValidation.safeParse(data);
+}
+
 const deleteByIdSchemaValidation = z.object({
     id: z.string()
         .refine(value => mongoose.Types.ObjectId.isValid(value), INVALID_ID_FORMAT)
