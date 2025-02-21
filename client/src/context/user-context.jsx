@@ -17,7 +17,7 @@ export function UserProvider({children}) {
                 setUser(res.data.data);
             })
             .catch(err => {
-                console.log(err);
+                setUser(null);
             })
             .finally(() => {
                 setLoading(false);

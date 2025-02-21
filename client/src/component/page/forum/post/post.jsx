@@ -11,8 +11,8 @@ import PostCommentCard from "../../../widget/forum/post/post-comment-card.jsx";
 import {Button} from "../../../catalyst-ui/button.jsx";
 import {PencilSquareIcon, TrashIcon} from "@heroicons/react/20/solid/index.js";
 import {Alert, AlertActions, AlertDescription, AlertTitle} from "../../../catalyst-ui/alert.jsx";
-import {PostContext} from "../../../../context/post-context.jsx";
 import error from "eslint-plugin-react/lib/util/error.js";
+import {PostContext} from "../../../../context/post-context-provider.jsx";
 
 function Post(props) {
 
@@ -93,7 +93,7 @@ function Post(props) {
                             <Divider className={"my-4"}/>
                             {
                                 post.content.split("\n").map((line, i) => (
-                                    <Text key={i}>
+                                    <Text className={"break-words"} key={i}>
                                         {line}
                                     </Text>
                                 ))

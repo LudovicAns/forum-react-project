@@ -22,7 +22,7 @@ function PostCard({post}) {
                 <UserAvatarWidget user={post.author} />
             </div>
             <div className={"h-12 max-h-12"}>
-                <Text className={"h-full overflow-hidden"}>{post.content}</Text>
+                <Text className={"h-full max-w-3xl break-words overflow-hidden"}>{post.content}</Text>
             </div>
             <Divider className={"my-2"}/>
             <div className={"flex-row flex gap-1"}>

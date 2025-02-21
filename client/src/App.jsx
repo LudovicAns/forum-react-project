@@ -5,18 +5,17 @@ import UserLogin from "./component/page/user/user-login.jsx";
 import UserRegister from "./component/page/user/user-register.jsx";
 import NavLayout from "./component/layout/nav-layout.jsx";
 import Posts from "./component/page/forum/post/posts.jsx";
-import RedirectIfConnected from "./component/redirect/redirect-if-connected.jsx";
 import RedirectIfNotConnected from "./component/redirect/redirect-if-not-connected.jsx";
 import UserPrivateView from "./component/page/user/user-private-view.jsx";
 import UserEdit from "./component/page/user/user-edit.jsx";
 import Error404 from "./component/page/error/error-404.jsx";
 import UserPublicView from "./component/page/user/user-public-view.jsx";
 import AppLayout from "./component/layout/app-layout.jsx";
-import {Text} from "./component/catalyst-ui/text.jsx";
 import PostCreate from "./component/page/forum/post/post-create.jsx";
 import Post from "./component/page/forum/post/post.jsx";
-import {PostContext} from "./context/post-context.jsx";
+import {PostProvider} from "./context/post-context-provider.jsx";
 import PostEdit from "./component/page/forum/post/post-edit.jsx";
+import RedirectIfConnected from "./component/redirect/redirect-if-connected.jsx";
 
 function App() {
 
@@ -24,15 +23,17 @@ function App() {
 
     return (
         <Routes>
-            <Route element={<AppLayout>
-                <NavLayout/>
-            </AppLayout>}>
+            <Route element={
+                <AppLayout>
+                    <NavLayout/>
+                </AppLayout>
+            }>
 
                 <Route index element={<Home/>}/>
 
                 <Route element={<AuthLayout/>}>
-                    <Route path="register" element={<RedirectIfNotConnected to={"/"}><UserRegister/></RedirectIfNotConnected>}/>
-                    <Route path="login" element={<RedirectIfNotConnected to={"/"}><UserLogin/></RedirectIfNotConnected>}/>
+                    <Route path="register" element={<RedirectIfConnected to={"/"}><UserRegister/></RedirectIfConnected>}/>
+                    <Route path="login" element={<RedirectIfConnected to={"/"}><UserLogin/></RedirectIfConnected>}/>
                 </Route>
 
                 <Route path={"profile"} element={
@@ -53,7 +54,7 @@ function App() {
                         <Route index element={<Posts/>}/>
                         <Route path={"new"} element={<PostCreate/>}/>
 
-                        <Route path={":postId"} element={<PostContext/>}>
+                        <Route path={":postId"} element={<PostProvider/>}>
                             <Route index element={<Post/>}/>
                             <Route path={"edit"} element={<PostEdit/>}/>
                         </Route>

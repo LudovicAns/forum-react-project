@@ -5,7 +5,7 @@ import Error404 from "../component/page/error/error-404.jsx";
 
 export const PostContext = createContext();
 
-export function PostContext({children}) {
+export function PostProvider({children}) {
 
     const {postId} = useParams();
 
