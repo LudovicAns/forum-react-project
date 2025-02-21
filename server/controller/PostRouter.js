@@ -4,6 +4,19 @@ import Auth from "../middleware/Auth.js";
 
 const router = express.Router();
 
+function CheckIsPostAuthor(req, res, next) {
+    const userId = res.locals.id;
+    const postId = req.params.id;
+
+    if (userId === postId) {
+        return next();
+    } else {
+        return res.status(401).json({
+            message: "Vous devez être l'auteur du post pour effectuer cette action."
+        });
+    }
+}
+
 router.post("/create", Auth, async (req, res) => {
     PostService.addPost(req.body)
         .then(post => {
@@ -59,7 +72,7 @@ router.get("/:id", Auth, async (req, res) => {
         });
 });
 
-router.delete("/:id", Auth, async (req, res) => {
+router.delete("/:id", Auth, CheckIsPostAuthor, async (req, res) => {
     const postId = req.params.id;
 
     PostService.deletePost({ id: postId})
