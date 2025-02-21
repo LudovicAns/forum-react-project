@@ -89,6 +89,31 @@ router.get("/:id", Auth, async (req, res) => {
         });
 });
 
+router.put("/:id", Auth, CheckIsPostAuthor, async (req, res) => {
+    const postId = req.params.id;
+    const post = req.body;
+
+    PostService.updatePost({
+        id_: postId,
+        ...post,
+    })
+        .then(post => {
+            if (post === null) {
+                return res.status(204).json({
+                    message: "Post introuvable."
+                });
+            }
+            return res.status(200).json({
+                message: "Post mis à jour avec succès."
+            })
+        })
+        .catch(err => {
+            res.status(400).json({
+                message: err.message
+            })
+        });
+})
+
 router.delete("/:id", Auth, CheckIsPostAuthor, async (req, res) => {
     const postId = req.params.id;
 
