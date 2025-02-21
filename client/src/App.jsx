@@ -4,7 +4,7 @@ import Home from "./component/page/Home.jsx";
 import Login from "./component/page/Login.jsx";
 import Register from "./component/page/Register.jsx";
 import NavLayout from "./component/layout/NavLayout.jsx";
-import Forum from "./component/page/Forum/Forum.jsx";
+import Posts from "./component/page/Forum/Forum.jsx";
 import RedirectIfConnected from "./component/redirect/RedirectIfConnected.jsx";
 import RedirectIfNotConnected from "./component/redirect/RedirectIfNotConnected.jsx";
 import Profile from "./component/page/Profile.jsx";
@@ -12,8 +12,11 @@ import ProfileEdit from "./component/page/ProfileEdit.jsx";
 import Error404 from "./component/page/Error404.jsx";
 import PublicProfile from "./component/page/PublicProfile.jsx";
 import AppLayout from "./component/layout/AppLayout.jsx";
+import {Text} from "./component/catalyst-ui/text.jsx";
 import NewPost from "./component/page/Forum/NewPost.jsx";
 import PublicPost from "./component/page/Forum/PublicPost.jsx";
+import {PostContextProvider} from "./context/PostContextProvider.jsx";
+import EditPost from "./component/page/Forum/EditPost.jsx";
 
 function App() {
 
@@ -44,23 +47,18 @@ function App() {
                 }/>
                 <Route path={"profile/:userId"} element={<PublicProfile/>}/>
 
-                <Route path="forum" element={
-                    <RedirectIfNotConnected stayOnPage={true}>
-                        <Forum/>
-                    </RedirectIfNotConnected>
-                }/>
+                <Route path={"forum"} element={<RedirectIfNotConnected stayOnPage={true}/>}>
 
-                <Route path={"forum/new-post"} element={
-                    <RedirectIfNotConnected>
-                        <NewPost/>
-                    </RedirectIfNotConnected>
-                }/>
+                    <Route path={"posts"}>
+                        <Route index element={<Posts/>}/>
+                        <Route path={"new"} element={<NewPost/>}/>
 
-                <Route path={"forum/post/:id"} element={
-                    <RedirectIfNotConnected>
-                        <PublicPost/>
-                    </RedirectIfNotConnected>
-                }/>
+                        <Route path={":postId"} element={<PostContextProvider/>}>
+                            <Route index element={<PublicPost/>}/>
+                            <Route path={"edit"} element={<EditPost/>}/>
+                        </Route>
+                    </Route>
+                </Route>
 
                 <Route path="*" element={<Error404/>}/>
 

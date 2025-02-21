@@ -22,14 +22,14 @@ import {Radio, RadioField, RadioGroup} from "../../catalyst-ui/radio.jsx";
 const availableSoon = (<Badge color={"yellow"}>Bientôt disponible</Badge>);
 
 const newPostButton = (
-    <Button href={"/forum/new-post"} color={"blue"} className={"w-full"}>
+    <Button href={"/forum/posts/new"} color={"blue"} className={"w-full"}>
         <PlusCircleIcon className={"fill-white dark:fill-white"}/>
         Ajouter un post
     </Button>
 );
 
 function Forum(props) {
-    document.title = "Forum - Forum";
+    document.title = "Forum - Postes";
 
     const [posts, setPosts] = React.useState([]);
     const [loading, setLoading] = React.useState(true);

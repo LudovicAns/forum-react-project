@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {UserContext} from "../../context/UserContextProvider.jsx";
-import {Navigate} from "react-router";
+import {Navigate, Outlet} from "react-router";
 import {Heading} from "../catalyst-ui/heading.jsx";
 import {Text} from "../catalyst-ui/text.jsx";
 import {Button} from "../catalyst-ui/button.jsx";
@@ -25,7 +25,7 @@ function RedirectIfNotConnected({children, stayOnPage = false}) {
         </div>
     )
 
-    return children;
+    return children ? children : <Outlet/>;
 }
 
 export default RedirectIfNotConnected;

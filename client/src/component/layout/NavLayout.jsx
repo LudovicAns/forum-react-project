@@ -41,7 +41,7 @@ const navItems = [
     },
     {
         label: 'Forum',
-        to: '/forum',
+        to: '/forum/posts',
         icon: <ChatBubbleBottomCenterTextIcon/>
     },
 ]

@@ -31,7 +31,7 @@ function PostCard({post}) {
                     {post.comments.length}
                 </Text>
             </div>
-            <Button color={"dark"} href={`/forum/post/${post._id}`} className={"mt-4"}>
+            <Button color={"dark"} href={`/forum/posts/${post._id}`} className={"mt-4"}>
                 <BookOpenIcon className={"size-[22px] fill-white"} />
                 Voir le post
             </Button>

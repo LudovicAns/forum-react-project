@@ -11,57 +11,43 @@ import CommentCard from "../../widget/forum/CommentCard.jsx";
 import {Button} from "../../catalyst-ui/button.jsx";
 import {PencilSquareIcon, TrashIcon} from "@heroicons/react/20/solid/index.js";
 import {Alert, AlertActions, AlertDescription, AlertTitle} from "../../catalyst-ui/alert.jsx";
+import {PostContext} from "../../../context/PostContextProvider.jsx";
+import error from "eslint-plugin-react/lib/util/error.js";
 
 function PublicPost(props) {
 
     const userContext = useContext(UserContext);
+    const postContext = useContext(PostContext);
+
+    const {
+        post,
+        isLoading: isPostLoading,
+        error: postError
+    } = postContext;
+
     const navigate = useNavigate();
 
-    const {id} = useParams();
-
-    const [loading, setLoading] = useState(true);
-    const [post, setPost] = useState(null);
     const [deleteAlertOpen, setDeleteAlertOpen] = useState(false);
 
-    useEffect(() => {
-        setLoading(true);
-        axios.get(`${import.meta.env.VITE_BACKEND_HOST}api/posts/${id}`, {withCredentials: true})
-            .then(res => {
-                if (res.status === 204) {
-                    setPost(null);
-                    document.title = "Forum - Post introuvable"
-                    return;
-                }
-                document.title = `Forum - ${res.data.data.title}`
-                setPost(res.data.data);
-            })
-            .catch(err => {
-                document.title = "Forum - Erreur"
-                console.error(err);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
-    }, []);
+    if (isPostLoading) return (<Text>Chargement ...</Text>);
+
+    if (postError) return (<Text>{error.message}</Text>);
 
     const isOwner = userContext.user.id === post?.author.id;
 
     function onDeletePost() {
-        axios.delete(`${import.meta.env.VITE_BACKEND_HOST}api/posts/${id}`, {withCredentials: true})
-            .then(() => {
-                navigate("/forum");
-            })
-            .catch(err => {
-                console.error(err);
-            })
-            .finally(() => {
-                setDeleteAlertOpen(false);
-            });
+        postContext.deletePost(() => {
+            navigate("/forum/posts");
+        }, (error) => {
+            console.error(error);
+        }, () => {
+            setDeleteAlertOpen(false);
+        });
     }
 
     const ownerActions = (
         <div className={"flex flex-row gap-4 w-full justify-end max-lg:justify-center mb-4"}>
-            <Button color={"light"} className={"cursor-pointer !text-blue-500"} href={"/forum/edit-post/" + id}>
+            <Button color={"light"} className={"cursor-pointer !text-blue-500"} href={"/forum/posts/" + post._id + "/edit"}>
                 <PencilSquareIcon className={"fill-blue-500"}/>
                 Modifier
             </Button>
@@ -87,7 +73,7 @@ function PublicPost(props) {
     return (
         <main>
             {
-                !loading &&
+                !isPostLoading &&
                 <>
                     <div>
                         {
