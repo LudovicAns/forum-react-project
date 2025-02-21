@@ -24,11 +24,14 @@ function PublicPost(props) {
             .then(res => {
                 if (res.status === 204) {
                     setPost(null);
+                    document.title = "Forum - Post introuvable"
                     return;
                 }
+                document.title = `Forum - ${res.data.data.title}`
                 setPost(res.data.data);
             })
             .catch(err => {
+                document.title = "Forum - Erreur"
                 console.error(err);
             })
             .finally(() => {
