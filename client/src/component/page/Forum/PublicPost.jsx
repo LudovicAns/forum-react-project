@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {useParams} from "react-router";
+import {useNavigate, useParams} from "react-router";
 import axios from "axios";
 import {Text} from "../../catalyst-ui/text.jsx";
 import {UserContext} from "../../../context/UserContextProvider.jsx";
@@ -10,15 +10,18 @@ import WritePostCommentWidget from "../../widget/forum/WritePostCommentWidget.js
 import CommentCard from "../../widget/forum/CommentCard.jsx";
 import {Button} from "../../catalyst-ui/button.jsx";
 import {PencilSquareIcon, TrashIcon} from "@heroicons/react/20/solid/index.js";
+import {Alert, AlertActions, AlertDescription, AlertTitle} from "../../catalyst-ui/alert.jsx";
 
 function PublicPost(props) {
 
     const userContext = useContext(UserContext);
+    const navigate = useNavigate();
 
     const {id} = useParams();
 
     const [loading, setLoading] = useState(true);
     const [post, setPost] = useState(null);
+    const [deleteAlertOpen, setDeleteAlertOpen] = useState(false);
 
     useEffect(() => {
         setLoading(true);
@@ -43,16 +46,41 @@ function PublicPost(props) {
 
     const isOwner = userContext.user.id === post?.author.id;
 
+    function onDeletePost() {
+        axios.delete(`${import.meta.env.VITE_BACKEND_HOST}api/posts/${id}`, {withCredentials: true})
+            .then(() => {
+                navigate("/forum");
+            })
+            .catch(err => {
+                console.error(err);
+            })
+            .finally(() => {
+                setDeleteAlertOpen(false);
+            });
+    }
+
     const ownerActions = (
         <div className={"flex flex-row gap-4 w-full justify-end max-lg:justify-center mb-4"}>
             <Button color={"light"} className={"cursor-pointer !text-blue-500"} href={"/forum/edit-post/" + id}>
                 <PencilSquareIcon className={"fill-blue-500"}/>
                 Modifier
             </Button>
-            <Button color={"light"} className={"cursor-pointer !text-red-500"} onClick={() => {console.log("todo: supprimer")}}>
+            <Button color={"light"} className={"cursor-pointer !text-red-500"} onClick={() => {setDeleteAlertOpen(true)}}>
                 <TrashIcon className={"fill-red-500"}/>
                 Supprimer
             </Button>
+            <Alert open={deleteAlertOpen} onClose={setDeleteAlertOpen}>
+                <AlertTitle>Confirmez la suppression</AlertTitle>
+                <AlertDescription>Êtes-vous certain de vouloir supprimer le post ?</AlertDescription>
+                <AlertActions>
+                    <Button autoFocus={true} plain={true} onClick={() => {setDeleteAlertOpen(false)}}>
+                        Annuler
+                    </Button>
+                    <Button color={"red"} onClick={onDeletePost} className={"cursor-pointer"}>
+                        Confirmer
+                    </Button>
+                </AlertActions>
+            </Alert>
         </div>
     );
 
