@@ -1,20 +1,20 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router";
 import axios from "axios";
-import {Text} from "../../catalyst-ui/text.jsx";
-import {UserContext} from "../../../context/UserContextProvider.jsx";
-import {Divider} from "../../catalyst-ui/divider.jsx";
-import {Heading} from "../../catalyst-ui/heading.jsx";
-import UserAvatarWidget from "../../widget/UserAvatarWidget.jsx";
-import WritePostCommentWidget from "../../widget/forum/WritePostCommentWidget.jsx";
-import CommentCard from "../../widget/forum/CommentCard.jsx";
-import {Button} from "../../catalyst-ui/button.jsx";
+import {Text} from "../../../catalyst-ui/text.jsx";
+import {UserContext} from "../../../../context/user-context.jsx";
+import {Divider} from "../../../catalyst-ui/divider.jsx";
+import {Heading} from "../../../catalyst-ui/heading.jsx";
+import UserAvatarWidget from "../../../widget/user-avatar-widget.jsx";
+import WritePostCommentWidget from "../../../widget/forum/post/write-post-comment-widget.jsx";
+import PostCommentCard from "../../../widget/forum/post/post-comment-card.jsx";
+import {Button} from "../../../catalyst-ui/button.jsx";
 import {PencilSquareIcon, TrashIcon} from "@heroicons/react/20/solid/index.js";
-import {Alert, AlertActions, AlertDescription, AlertTitle} from "../../catalyst-ui/alert.jsx";
-import {PostContext} from "../../../context/PostContextProvider.jsx";
+import {Alert, AlertActions, AlertDescription, AlertTitle} from "../../../catalyst-ui/alert.jsx";
+import {PostContext} from "../../../../context/post-context.jsx";
 import error from "eslint-plugin-react/lib/util/error.js";
 
-function PublicPost(props) {
+function Post(props) {
 
     const userContext = useContext(UserContext);
     const postContext = useContext(PostContext);
@@ -110,7 +110,7 @@ function PublicPost(props) {
                                 <Heading>Commentaires</Heading>
                                 {
                                     post.comments.map((comment) => (
-                                        <CommentCard key={comment.id} comment={comment} />
+                                        <PostCommentCard key={comment.id} comment={comment} />
                                     ))
                                 }
                             </div>
@@ -122,4 +122,4 @@ function PublicPost(props) {
     );
 }
 
-export default PublicPost;
+export default Post;

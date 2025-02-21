@@ -1,6 +1,6 @@
 import React from 'react';
-import {Pagination, PaginationNext, PaginationPrevious} from "../../catalyst-ui/pagination.jsx";
-import {Divider} from "../../catalyst-ui/divider.jsx";
+import {Pagination, PaginationNext, PaginationPrevious} from "../../../catalyst-ui/pagination.jsx";
+import {Divider} from "../../../catalyst-ui/divider.jsx";
 
 function PostCardList({children}) {
 

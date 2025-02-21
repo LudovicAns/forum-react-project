@@ -9,9 +9,9 @@ import {Divider} from "../../catalyst-ui/divider.jsx";
 import clsx from "clsx";
 import axios from "axios";
 import {Badge} from "../../catalyst-ui/badge.jsx";
-import {UserContext} from "../../../context/UserContextProvider.jsx";
+import {UserContext} from "../../../context/user-context.jsx";
 
-function CreateCommentForm({post = null}) {
+function CommentCreateForm({post = null}) {
 
     const userContext = useContext(UserContext);
 
@@ -63,4 +63,4 @@ function CreateCommentForm({post = null}) {
     );
 }
 
-export default CreateCommentForm;
+export default CommentCreateForm;

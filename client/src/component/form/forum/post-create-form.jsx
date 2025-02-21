@@ -7,13 +7,13 @@ import {Button} from "../../catalyst-ui/button.jsx";
 import {Divider} from "../../catalyst-ui/divider.jsx";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {createSchemaValidation} from "../../../validation/Post.js";
+import {createSchemaValidation} from "../../../validation/post-validation.js";
 import clsx from "clsx";
 import axios from "axios";
-import {UserContext} from "../../../context/UserContextProvider.jsx";
+import {UserContext} from "../../../context/user-context.jsx";
 import {useNavigate} from "react-router";
 
-function CreatePostForm(props) {
+function PostCreateForm(props) {
 
     const userContext = React.useContext(UserContext);
 
@@ -70,4 +70,4 @@ function CreatePostForm(props) {
     );
 }
 
-export default CreatePostForm;
+export default PostCreateForm;

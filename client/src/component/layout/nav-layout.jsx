@@ -19,10 +19,10 @@ import {
     SunIcon, UserCircleIcon,
     UserPlusIcon
 } from "@heroicons/react/20/solid/index.js";
-import {useTheme} from "../../context/ThemeContextProvider.jsx";
+import {useTheme} from "../../context/theme-context.jsx";
 import logo from "../../assets/logo.svg";
 import {Avatar} from "../catalyst-ui/avatar.jsx";
-import {UserContext} from "../../context/UserContextProvider.jsx";
+import {UserContext} from "../../context/user-context.jsx";
 import {
     Dropdown,
     DropdownButton,
@@ -31,7 +31,7 @@ import {
     DropdownLabel,
     DropdownMenu
 } from "../catalyst-ui/dropdown.jsx";
-import Footer from "../widget/Footer.jsx";
+import Footer from "../widget/footer.jsx";
 
 const navItems = [
     {

@@ -1,7 +1,7 @@
 import React from 'react';
-import {Text} from "../../catalyst-ui/text.jsx";
+import {Text} from "../../../catalyst-ui/text.jsx";
 
-function CommentCard({comment}) {
+function PostCommentCard({comment}) {
 
     if (!comment) return (<></>);
 
@@ -12,4 +12,4 @@ function CommentCard({comment}) {
     );
 }
 
-export default CommentCard;
+export default PostCommentCard;

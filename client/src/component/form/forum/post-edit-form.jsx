@@ -9,11 +9,11 @@ import {Textarea} from "../../catalyst-ui/textarea.jsx";
 import {Divider} from "../../catalyst-ui/divider.jsx";
 import {Button} from "../../catalyst-ui/button.jsx";
 import clsx from "clsx";
-import {PostContext} from "../../../context/PostContextProvider.jsx";
+import {PostContext} from "../../../context/post-context.jsx";
 import {useNavigate} from "react-router";
-import {updateSchemaValidation} from "../../../validation/Post.js";
+import {updateSchemaValidation} from "../../../validation/post-validation.js";
 
-function EditPostForm() {
+function PostEditForm() {
 
     const {
         post,
@@ -68,4 +68,4 @@ function EditPostForm() {
     );
 }
 
-export default EditPostForm;
+export default PostEditForm;

@@ -1,13 +1,13 @@
 import React, {useContext} from 'react';
-import {Subheading} from "../../catalyst-ui/heading.jsx";
-import {Text, TextLink} from "../../catalyst-ui/text.jsx";
-import {Divider} from "../../catalyst-ui/divider.jsx";
-import {Button} from "../../catalyst-ui/button.jsx";
-import {Avatar} from "../../catalyst-ui/avatar.jsx";
+import {Subheading} from "../../../catalyst-ui/heading.jsx";
+import {Text, TextLink} from "../../../catalyst-ui/text.jsx";
+import {Divider} from "../../../catalyst-ui/divider.jsx";
+import {Button} from "../../../catalyst-ui/button.jsx";
+import {Avatar} from "../../../catalyst-ui/avatar.jsx";
 import {BookOpenIcon, ChatBubbleOvalLeftEllipsisIcon} from "@heroicons/react/20/solid/index.js";
-import {UserContext} from "../../../context/UserContextProvider.jsx";
-import {Badge} from "../../catalyst-ui/badge.jsx";
-import UserAvatarWidget from "../UserAvatarWidget.jsx";
+import {UserContext} from "../../../../context/user-context.jsx";
+import {Badge} from "../../../catalyst-ui/badge.jsx";
+import UserAvatarWidget from "../../user-avatar-widget.jsx";
 
 function PostCard({post}) {
 

@@ -6,12 +6,12 @@ import {Text, TextLink} from "../catalyst-ui/text.jsx";
 import {Divider} from "../catalyst-ui/divider.jsx";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {loginSchema} from "../../validation/User.js";
-import {UserContext} from "../../context/UserContextProvider.jsx";
+import {loginSchema} from "../../validation/user-validation.js";
+import {UserContext} from "../../context/user-context.jsx";
 import {Checkbox, CheckboxField} from "../catalyst-ui/checkbox.jsx";
 import {Badge} from "../catalyst-ui/badge.jsx";
 
-function LoginForm() {
+function UserLoginForm() {
 
     const userContext = useContext(UserContext);
 
@@ -81,4 +81,4 @@ function LoginForm() {
     );
 }
 
-export default LoginForm;
+export default UserLoginForm;

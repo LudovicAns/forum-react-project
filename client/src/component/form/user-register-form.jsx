@@ -6,12 +6,12 @@ import {Text, TextLink} from "../catalyst-ui/text.jsx";
 import {Divider} from "../catalyst-ui/divider.jsx";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {registerSchema} from "../../validation/User.js";
-import {UserContext} from "../../context/UserContextProvider.jsx";
+import {registerSchema} from "../../validation/user-validation.js";
+import {UserContext} from "../../context/user-context.jsx";
 import error from "eslint-plugin-react/lib/util/error.js";
 import {useNavigate} from "react-router";
 
-function RegisterForm(props) {
+function UserRegisterForm(props) {
 
     const userContext = useContext(UserContext);
 
@@ -90,4 +90,4 @@ function RegisterForm(props) {
     );
 }
 
-export default RegisterForm;
+export default UserRegisterForm;

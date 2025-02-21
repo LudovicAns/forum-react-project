@@ -1,10 +1,10 @@
 import React, {useContext, useEffect, useState} from 'react';
-import EditPostForm from "../../form/forum/EditPostForm.jsx";
+import PostEditForm from "../../../form/forum/post-edit-form.jsx";
 import {useParams} from "react-router";
 import axios from "axios";
-import {PostContext} from "../../../context/PostContextProvider.jsx";
+import {PostContext} from "../../../../context/post-context.jsx";
 
-function EditPost() {
+function PostEdit() {
 
     const {
         post,
@@ -15,11 +15,11 @@ function EditPost() {
         <main>
             {
                 (!isPostLoading && post) && (
-                    <EditPostForm/>
+                    <PostEditForm/>
                 )
             }
         </main>
     );
 }
 
-export default EditPost;
+export default PostEdit;

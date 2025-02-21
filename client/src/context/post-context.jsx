@@ -1,11 +1,11 @@
 import {createContext, useEffect, useState} from "react";
 import {Outlet, useParams} from "react-router";
 import axios from "axios";
-import Error404 from "../component/page/Error404.jsx";
+import Error404 from "../component/page/error/error-404.jsx";
 
 export const PostContext = createContext();
 
-export function PostContextProvider({children}) {
+export function PostContext({children}) {
 
     const {postId} = useParams();
 

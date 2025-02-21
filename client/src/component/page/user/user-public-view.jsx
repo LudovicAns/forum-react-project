@@ -1,13 +1,13 @@
 import React, {useEffect} from 'react';
 import {useParams} from "react-router";
 import axios from "axios";
-import ProfileWidget from "../widget/ProfileWidget.jsx";
-import {Text} from "../catalyst-ui/text.jsx";
-import {Heading} from "../catalyst-ui/heading.jsx";
-import {Button} from "../catalyst-ui/button.jsx";
+import UserWidget from "../../widget/user-widget.jsx";
+import {Text} from "../../catalyst-ui/text.jsx";
+import {Heading} from "../../catalyst-ui/heading.jsx";
+import {Button} from "../../catalyst-ui/button.jsx";
 import {ArrowUturnLeftIcon} from "@heroicons/react/16/solid/index.js";
 
-function PublicProfile() {
+function UserPublicView() {
 
     const [loading, setLoading] = React.useState(true);
 
@@ -19,9 +19,9 @@ function PublicProfile() {
         if (user) {
             document.title = `Forum - Profil de ${user.username}`;
         } else if (!user && !loading) {
-            document.title = "Forum - Profil introuvable";
+            document.title = "Posts - Profil introuvable";
         } else {
-            document.title = "Forum - Profil";
+            document.title = "Posts - Profil";
         }
     }, [user, loading])
 
@@ -66,10 +66,10 @@ function PublicProfile() {
                             </div>
                         </div>
                         :
-                        <ProfileWidget user={user}/>
+                        <UserWidget user={user}/>
             }
         </main>
     );
 }
 
-export default PublicProfile;
+export default UserPublicView;

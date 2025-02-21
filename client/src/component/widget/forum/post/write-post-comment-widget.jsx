@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
-import {Text} from "../../catalyst-ui/text.jsx";
-import CreateCommentForm from "../../form/forum/CreateCommentForm.jsx";
+import {Text} from "../../../catalyst-ui/text.jsx";
+import CommentCreateForm from "../../../form/forum/comment-create-form.jsx";
 
 function WritePostCommentWidget({post}) {
 
@@ -8,7 +8,7 @@ function WritePostCommentWidget({post}) {
 
     return (
         <div>
-            <CreateCommentForm post={post}/>
+            <CommentCreateForm post={post}/>
         </div>
     );
 }

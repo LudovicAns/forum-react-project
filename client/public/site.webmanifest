@@ -1,6 +1,6 @@
 {
-  "name": "Forum",
-  "short_name": "Forum",
+  "name": "Posts",
+  "short_name": "Posts",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",

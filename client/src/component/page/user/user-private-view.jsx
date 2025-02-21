@@ -1,17 +1,17 @@
 import React, {useContext} from 'react';
-import {Heading, Subheading} from "../catalyst-ui/heading.jsx";
-import {Strong, Text} from "../catalyst-ui/text.jsx";
-import {UserContext} from "../../context/UserContextProvider.jsx";
-import ProfileWidget from "../widget/ProfileWidget.jsx";
-import {Button} from "../catalyst-ui/button.jsx";
-import {Badge} from "../catalyst-ui/badge.jsx";
-import {Divider} from "../catalyst-ui/divider.jsx";
+import {Heading, Subheading} from "../../catalyst-ui/heading.jsx";
+import {Strong, Text} from "../../catalyst-ui/text.jsx";
+import {UserContext} from "../../../context/user-context.jsx";
+import UserWidget from "../../widget/user-widget.jsx";
+import {Button} from "../../catalyst-ui/button.jsx";
+import {Badge} from "../../catalyst-ui/badge.jsx";
+import {Divider} from "../../catalyst-ui/divider.jsx";
 
-function Profile() {
+function UserPrivateView() {
 
     const userContext = useContext(UserContext);
 
-    document.title = "Forum - Profil";
+    document.title = "Posts - Profil";
 
     return (
         <main className={"flex flex-col gap-4"}>
@@ -19,7 +19,7 @@ function Profile() {
                 <Heading>Profile</Heading>
                 <Text>Votre page de profil vous permet de consulter les informations visible par les autres
                     utilisateurs.</Text>
-                <ProfileWidget className={"mt-4"} user={userContext.user}/>
+                <UserWidget className={"mt-4"} user={userContext.user}/>
 
                 <Subheading className={"mt-4"}>Modification</Subheading>
                 <Text className={"mb-4"}>Vous pouvez modifier votre profil en cliquant sur le bouton ci-dessous.</Text>
@@ -37,4 +37,4 @@ function Profile() {
     )
 }
 
-export default Profile;
+export default UserPrivateView;

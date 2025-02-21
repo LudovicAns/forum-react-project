@@ -5,7 +5,7 @@ import JwtService from "./jwt-service.js";
 export const UserService = {
     register: async function (user) {
         if (!user) {
-            throw new Error('User is required');
+            throw new Error('UserPrivateView is required');
         }
 
         const validation = registerValidation(user);
@@ -45,7 +45,7 @@ export const UserService = {
         }
 
         if (!user) {
-            throw new Error('Login and/or password is incorrect');
+            throw new Error('UserLogin and/or password is incorrect');
         }
 
         const match = await new Promise((resolve, reject) => {
@@ -58,7 +58,7 @@ export const UserService = {
         });
 
         if (!match) {
-            throw new Error('Login and/or password is incorrect');
+            throw new Error('UserLogin and/or password is incorrect');
         }
 
         return {
@@ -97,7 +97,7 @@ export const UserService = {
         let user = await UserRepository.getById(id);
 
         if (!user) {
-            throw new Error('User not found');
+            throw new Error('UserPrivateView not found');
         }
 
         if (data.description) {

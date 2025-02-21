@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {UserContext} from "../../context/UserContextProvider.jsx";
+import {UserContext} from "../../context/user-context.jsx";
 import {Navigate, Outlet} from "react-router";
 import {Heading} from "../catalyst-ui/heading.jsx";
 import {Text} from "../catalyst-ui/text.jsx";

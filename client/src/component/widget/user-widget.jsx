@@ -8,7 +8,7 @@ import {Divider} from "../catalyst-ui/divider.jsx";
 import {Text} from "../catalyst-ui/text.jsx";
 import {ExclamationCircleIcon} from "@heroicons/react/20/solid/index.js";
 
-function ProfileWidget({className, user}) {
+function UserWidget({className, user}) {
     const avatarUrl = user?.avatar ? import.meta.env.VITE_BACKEND_HOST + user.avatar : "";
 
     if (!user) return (
@@ -64,4 +64,4 @@ function ProfileWidget({className, user}) {
     );
 }
 
-export default ProfileWidget;
+export default UserWidget;

@@ -1,7 +1,7 @@
 import React from 'react';
-import {Heading} from "../catalyst-ui/heading.jsx";
-import {Text} from "../catalyst-ui/text.jsx";
-import {Button} from "../catalyst-ui/button.jsx";
+import {Heading} from "../../catalyst-ui/heading.jsx";
+import {Text} from "../../catalyst-ui/text.jsx";
+import {Button} from "../../catalyst-ui/button.jsx";
 import {ArrowUturnLeftIcon} from "@heroicons/react/16/solid/index.js";
 
 function Error404(props)

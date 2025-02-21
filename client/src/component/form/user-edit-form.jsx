@@ -7,14 +7,14 @@ import {Button} from "../catalyst-ui/button.jsx";
 import {Description, ErrorMessage, Field, FieldGroup, Fieldset, Label, Legend} from "../catalyst-ui/fieldset.jsx";
 import {Text} from "../catalyst-ui/text.jsx";
 import {Textarea} from "../catalyst-ui/textarea.jsx";
-import {UserContext} from "../../context/UserContextProvider.jsx";
+import {UserContext} from "../../context/user-context.jsx";
 import {Input} from "../catalyst-ui/input.jsx";
 import {Badge} from "../catalyst-ui/badge.jsx";
-import {editProfileSchema} from "../../validation/User.js";
+import {editProfileSchema} from "../../validation/user-validation.js";
 import axios from "axios";
 import {useNavigate} from "react-router";
 
-function ProfileEditForm({className}) {
+function UserEditForm({className}) {
     const userContext = useContext(UserContext);
     const navigate = useNavigate();
 
@@ -98,4 +98,4 @@ function ProfileEditForm({className}) {
     );
 }
 
-export default ProfileEditForm;
+export default UserEditForm;

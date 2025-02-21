@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
-import PostCardList from "../../widget/forum/PostCardList.jsx";
-import PostCard from "../../widget/forum/PostCard.jsx";
-import {Button} from "../../catalyst-ui/button.jsx";
+import PostCardList from "../../../widget/forum/post/post-card-list.jsx";
+import PostCard from "../../../widget/forum/post/post-card.jsx";
+import {Button} from "../../../catalyst-ui/button.jsx";
 import {
     ArchiveBoxIcon,
     ArrowPathIcon,
@@ -10,14 +10,14 @@ import {
     PlusCircleIcon,
     StarIcon
 } from "@heroicons/react/20/solid/index.js";
-import {Heading, Subheading} from "../../catalyst-ui/heading.jsx";
-import {Switch, SwitchField, SwitchGroup} from "../../catalyst-ui/switch.jsx";
-import {Fieldset, Label, Legend} from "../../catalyst-ui/fieldset.jsx";
-import {Text, TextLink} from "../../catalyst-ui/text.jsx";
-import {Divider} from "../../catalyst-ui/divider.jsx";
-import {Badge} from "../../catalyst-ui/badge.jsx";
+import {Heading, Subheading} from "../../../catalyst-ui/heading.jsx";
+import {Switch, SwitchField, SwitchGroup} from "../../../catalyst-ui/switch.jsx";
+import {Fieldset, Label, Legend} from "../../../catalyst-ui/fieldset.jsx";
+import {Text, TextLink} from "../../../catalyst-ui/text.jsx";
+import {Divider} from "../../../catalyst-ui/divider.jsx";
+import {Badge} from "../../../catalyst-ui/badge.jsx";
 import axios from "axios";
-import {Radio, RadioField, RadioGroup} from "../../catalyst-ui/radio.jsx";
+import {Radio, RadioField, RadioGroup} from "../../../catalyst-ui/radio.jsx";
 
 const availableSoon = (<Badge color={"yellow"}>Bientôt disponible</Badge>);
 
@@ -28,8 +28,8 @@ const newPostButton = (
     </Button>
 );
 
-function Forum(props) {
-    document.title = "Forum - Postes";
+function Posts(props) {
+    document.title = "Posts - Postes";
 
     const [posts, setPosts] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
@@ -146,4 +146,4 @@ function Forum(props) {
     );
 }
 
-export default Forum;
+export default Posts;

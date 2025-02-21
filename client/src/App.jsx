@@ -1,22 +1,22 @@
 import {Route, Routes} from "react-router";
-import AuthLayout from "./component/layout/AuthLayout.jsx";
-import Home from "./component/page/Home.jsx";
-import Login from "./component/page/Login.jsx";
-import Register from "./component/page/Register.jsx";
-import NavLayout from "./component/layout/NavLayout.jsx";
-import Posts from "./component/page/Forum/Forum.jsx";
-import RedirectIfConnected from "./component/redirect/RedirectIfConnected.jsx";
-import RedirectIfNotConnected from "./component/redirect/RedirectIfNotConnected.jsx";
-import Profile from "./component/page/Profile.jsx";
-import ProfileEdit from "./component/page/ProfileEdit.jsx";
-import Error404 from "./component/page/Error404.jsx";
-import PublicProfile from "./component/page/PublicProfile.jsx";
-import AppLayout from "./component/layout/AppLayout.jsx";
+import AuthLayout from "./component/layout/auth-layout.jsx";
+import Home from "./component/page/home.jsx";
+import UserLogin from "./component/page/user/user-login.jsx";
+import UserRegister from "./component/page/user/user-register.jsx";
+import NavLayout from "./component/layout/nav-layout.jsx";
+import Posts from "./component/page/forum/post/posts.jsx";
+import RedirectIfConnected from "./component/redirect/redirect-if-connected.jsx";
+import RedirectIfNotConnected from "./component/redirect/redirect-if-not-connected.jsx";
+import UserPrivateView from "./component/page/user/user-private-view.jsx";
+import UserEdit from "./component/page/user/user-edit.jsx";
+import Error404 from "./component/page/error/error-404.jsx";
+import UserPublicView from "./component/page/user/user-public-view.jsx";
+import AppLayout from "./component/layout/app-layout.jsx";
 import {Text} from "./component/catalyst-ui/text.jsx";
-import NewPost from "./component/page/Forum/NewPost.jsx";
-import PublicPost from "./component/page/Forum/PublicPost.jsx";
-import {PostContextProvider} from "./context/PostContextProvider.jsx";
-import EditPost from "./component/page/Forum/EditPost.jsx";
+import PostCreate from "./component/page/forum/post/post-create.jsx";
+import Post from "./component/page/forum/post/post.jsx";
+import {PostContext} from "./context/post-context.jsx";
+import PostEdit from "./component/page/forum/post/post-edit.jsx";
 
 function App() {
 
@@ -31,31 +31,31 @@ function App() {
                 <Route index element={<Home/>}/>
 
                 <Route element={<AuthLayout/>}>
-                    <Route path="register" element={<RedirectIfConnected to={"/"}><Register/></RedirectIfConnected>}/>
-                    <Route path="login" element={<RedirectIfConnected to={"/"}><Login/></RedirectIfConnected>}/>
+                    <Route path="register" element={<RedirectIfNotConnected to={"/"}><UserRegister/></RedirectIfNotConnected>}/>
+                    <Route path="login" element={<RedirectIfNotConnected to={"/"}><UserLogin/></RedirectIfNotConnected>}/>
                 </Route>
 
                 <Route path={"profile"} element={
                     <RedirectIfNotConnected>
-                        <Profile/>
+                        <UserPrivateView/>
                     </RedirectIfNotConnected>
                 }/>
                 <Route path={"profile/edit"} element={
                     <RedirectIfNotConnected>
-                        <ProfileEdit/>
+                        <UserEdit/>
                     </RedirectIfNotConnected>
                 }/>
-                <Route path={"profile/:userId"} element={<PublicProfile/>}/>
+                <Route path={"profile/:userId"} element={<UserPublicView/>}/>
 
                 <Route path={"forum"} element={<RedirectIfNotConnected stayOnPage={true}/>}>
 
                     <Route path={"posts"}>
                         <Route index element={<Posts/>}/>
-                        <Route path={"new"} element={<NewPost/>}/>
+                        <Route path={"new"} element={<PostCreate/>}/>
 
-                        <Route path={":postId"} element={<PostContextProvider/>}>
-                            <Route index element={<PublicPost/>}/>
-                            <Route path={"edit"} element={<EditPost/>}/>
+                        <Route path={":postId"} element={<PostContext/>}>
+                            <Route index element={<Post/>}/>
+                            <Route path={"edit"} element={<PostEdit/>}/>
                         </Route>
                     </Route>
                 </Route>
