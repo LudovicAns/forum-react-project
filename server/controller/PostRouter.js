@@ -34,7 +34,7 @@ async function CheckIsPostAuthor(req, res, next) {
     }
 }
 
-router.post("/create", Auth, async (req, res) => {
+router.post("/", Auth, async (req, res) => {
     PostService.addPost(req.body)
         .then(post => {
             res.status(201).json({

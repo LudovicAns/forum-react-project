@@ -29,7 +29,7 @@ function CreatePostForm(props) {
     });
 
     function onSubmit(data) {
-        axios.post(`${import.meta.env.VITE_BACKEND_HOST}api/posts/create`, {
+        axios.post(`${import.meta.env.VITE_BACKEND_HOST}api/posts/`, {
             ...data,
             author: userContext.user.id
         }, {withCredentials: true})
