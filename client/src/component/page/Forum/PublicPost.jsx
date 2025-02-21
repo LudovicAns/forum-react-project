@@ -100,12 +100,10 @@ function PublicPost(props) {
                             }
                         </div>
                     </div>
+
                     <Divider className={"my-4"}/>
-                    {
-                        !isOwner && (
-                            <WritePostCommentWidget post={post}/>
-                        )
-                    }
+                    <WritePostCommentWidget post={post}/>
+
                     {
                         post.comments?.length > 0 && (
                             <div>

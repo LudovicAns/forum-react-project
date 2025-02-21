@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Field, FieldGroup, Fieldset, Label, Legend} from "../../catalyst-ui/fieldset.jsx";
@@ -9,8 +9,13 @@ import {Divider} from "../../catalyst-ui/divider.jsx";
 import clsx from "clsx";
 import axios from "axios";
 import {Badge} from "../../catalyst-ui/badge.jsx";
+import {UserContext} from "../../../context/UserContextProvider.jsx";
 
 function CreateCommentForm({post = null}) {
+
+    const userContext = useContext(UserContext);
+
+    const isOwner = userContext.user.id === post.author.id;
 
     const {
         register,
@@ -40,7 +45,12 @@ function CreateCommentForm({post = null}) {
         <form onSubmit={handleSubmit(onSubmit)}>
             <Fieldset>
                 <Legend>Ajouter un commentaire <Badge color={"yellow"}>Bientôt disponible</Badge></Legend>
-                <Text>Qu'avez vous à dire au sujet du post de <TextLink href={`/profile/${post.author.id}`}>@{post.author.username}</TextLink> ?</Text>
+                {
+                    isOwner ?
+                        <Text>Qu'avez vous à dire au sujet de votre post ?</Text>
+                        :
+                        <Text>Qu'avez vous à dire au sujet du post de <TextLink href={`/profile/${post.author.id}`}>@{post.author.username}</TextLink> ?</Text>
+                }
                 <FieldGroup>
                     <Field disabled={true}>
                         <Textarea rows={6} name="content" />
