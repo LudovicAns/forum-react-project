@@ -56,7 +56,7 @@ function Forum(props) {
                 <div className={"flex flex-col gap-2"}>
                     <form>
                         <Fieldset>
-                            <Legend>Post à afficher</Legend>
+                            <Legend>Post à afficher {availableSoon}</Legend>
                             <RadioGroup name={"post-type"} defaultValue={"all"}>
                                 <RadioField>
                                     <Label className={"w-full flex flex-row gap-2 items-center"}>
