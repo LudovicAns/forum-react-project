@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {ErrorMessage, Field, FieldGroup, Fieldset, Label, Legend} from "../catalyst-ui/fieldset.jsx";
 import {Input} from "../catalyst-ui/input.jsx";
 import {Button} from "../catalyst-ui/button.jsx";
@@ -15,11 +15,11 @@ function UserLoginForm() {
 
     const userContext = useContext(UserContext);
 
-    const [requestInfo, setRequestInfo] = React.useState({init: false, success: undefined, message: ""});
+    const [responseMessage, setResponseMessage] = useState(null);
 
     const {
         register,
-        formState: {errors},
+        formState: {errors, isLoading},
         handleSubmit,
         reset
     } = useForm({
@@ -28,20 +28,12 @@ function UserLoginForm() {
 
     function onSubmit(data) {
         function onSuccess(res) {
-            setRequestInfo({
-                init: true,
-                success: true,
-                message: res.data.message
-            });
+            setResponseMessage(res.data.data.message);
             reset();
         }
 
         function onError(err) {
-            setRequestInfo({
-                init: true,
-                success: false,
-                message: err.response.data.message
-            });
+            setResponseMessage(err.response.data.message);
         }
 
         userContext.login(data, onSuccess, onError);
@@ -70,10 +62,10 @@ function UserLoginForm() {
                     </CheckboxField>
                     <Divider/>
                     <Button className={"w-full"} type={"submit"}>Connexion</Button>
-                    {(requestInfo.init && !requestInfo.success) &&
-                        <Text className={"text-center !text-red-600 !dark:text-red-500"}>{requestInfo.message}</Text>}
-                    {(requestInfo.init && requestInfo.success) &&
-                        <Text className={"text-center"}>{requestInfo.message}</Text>}
+                    {
+                        responseMessage &&
+                        <Text className={"text-center !text-red-600 !dark:text-red-500"}>{responseMessage}</Text>
+                    }
                 </FieldGroup>
             </Fieldset>
             <Text className={"mt-4 text-center"}>Vous n'avez pas encore de compte ? <TextLink href={"/register"}>Cliquez ici</TextLink></Text>

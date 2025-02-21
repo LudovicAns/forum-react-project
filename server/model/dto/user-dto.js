@@ -1,4 +1,5 @@
 export function userDto(user) {
+    if (!user) return null;
     return {
         username: user.username,
         email: user.email,
