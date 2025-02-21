@@ -1,7 +1,7 @@
 import multer from "multer";
 import path from "path";
 import fs from "fs";
-import JwtService from "../service/JwtService.js";
+import JwtService from "../service/jwt-service.js";
 
 // todo : use cloud for better perf (ex: uploadthing aws s3).
 

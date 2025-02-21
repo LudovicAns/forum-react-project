@@ -3,8 +3,8 @@ import {
     validateDeleteByIdComment,
     validateGetByIdComment,
     validateUpdateComment
-} from "../validation/Comment.js";
-import {CommentRepository} from "../model/dao/repository/CommentRepository.js";
+} from "../validation/comment-validation.js";
+import {CommentRepository} from "../model/dao/repository/comment-repository.js";
 
 export const CommentService = {
     addComment: async (data) => {

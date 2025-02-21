@@ -1,6 +1,6 @@
 import express from "express";
-import {PostService} from "../service/PostService.js";
-import Auth from "../middleware/Auth.js";
+import {PostService} from "../service/post-service.js";
+import Auth from "../middleware/auth-middleware.js";
 import mongoose from "mongoose";
 
 const router = express.Router();

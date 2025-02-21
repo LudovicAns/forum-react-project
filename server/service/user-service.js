@@ -1,6 +1,6 @@
-import {loginValidation, registerValidation, updateValidation} from "../validation/User.js";
-import {UserRepository} from "../model/dao/repository/UserRepository.js";
-import JwtService from "./JwtService.js";
+import {loginValidation, registerValidation, updateValidation} from "../validation/user-validation.js";
+import {UserRepository} from "../model/dao/repository/user-repository.js";
+import JwtService from "./jwt-service.js";
 
 export const UserService = {
     register: async function (user) {

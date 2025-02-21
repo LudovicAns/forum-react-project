@@ -1,4 +1,4 @@
-import {Comment} from "../entity/Comment.js";
+import {Comment} from "../entity/comment.js";
 
 export const CommentRepository = {
     create: async function (comment) {

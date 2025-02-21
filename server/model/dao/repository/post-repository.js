@@ -1,5 +1,5 @@
-import {Post} from "../entity/Post.js";
-import {userDto} from "../../dto/User.js";
+import {Post} from "../entity/post.js";
+import {userDto} from "../../dto/user-dto.js";
 
 const populatePost = [
     {

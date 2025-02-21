@@ -1,4 +1,4 @@
-import JwtService from "../service/JwtService.js";
+import JwtService from "../service/jwt-service.js";
 
 export default function (req, res, next) {
     const cookies = req.cookies;

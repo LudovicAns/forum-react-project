@@ -1,9 +1,9 @@
 import express from 'express';
 import 'dotenv/config'
-import {connect as connectMongoDB} from "./model/database/MongoDB.js";
-import UserRouter from "./controller/UserRouter.js";
-import PostRouter from "./controller/PostRouter.js";
-import logger from "./middleware/Logger.js";
+import {connect as connectMongoDB} from "./model/database/mongodb.js";
+import UserRouter from "./controller/user-controller.js";
+import PostRouter from "./controller/post-controller.js";
+import loggerMiddleware from "./middleware/logger-middleware.js";
 import cors from 'cors';
 import cookieParser from "cookie-parser";
 
@@ -26,7 +26,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.use(logger);
+app.use(loggerMiddleware);
 
 app.use(express.json());
 

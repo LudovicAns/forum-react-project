@@ -3,8 +3,8 @@ import {
     deleteByIdPostValidation, getByIdAndUserIdPostValidation,
     getByIdPostValidation,
     updatePostValidation
-} from "../validation/Post.js";
-import {PostRepository} from "../model/dao/repository/PostRepository.js";
+} from "../validation/post-validation.js";
+import {PostRepository} from "../model/dao/repository/post-repository.js";
 
 export const PostService = {
     addPost: async (data) => {

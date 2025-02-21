@@ -1,6 +1,6 @@
 import z from "zod";
 import mongoose from "mongoose";
-import {UserRepository} from "../model/dao/repository/UserRepository.js";
+import {UserRepository} from "../model/dao/repository/user-repository.js";
 
 const INVALID_MONGOOSE_OBJECT_ID = "L'id n'est pas valide."
 const INVALID_AUTHOR_ID = "L'auteur n'existe pas."

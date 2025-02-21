@@ -1,8 +1,8 @@
 import z, {optional} from 'zod';
 import mongoose from "mongoose";
-import {Post} from "../model/dao/entity/Post.js";
-import {PostRepository} from "../model/dao/repository/PostRepository.js";
-import {CommentRepository} from "../model/dao/repository/CommentRepository.js";
+import {Post} from "../model/dao/entity/post.js";
+import {PostRepository} from "../model/dao/repository/post-repository.js";
+import {CommentRepository} from "../model/dao/repository/comment-repository.js";
 
 const INVALID_POST_TITLE_LENGTH = "Le titre du post doit contenir au minimum 3 caractères.";
 const INVALID_POST_CONTENT_LENGTH = "Le contenu du post doit contenir au minimum 50 caractères.";

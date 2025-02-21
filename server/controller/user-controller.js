@@ -1,9 +1,9 @@
 import express from "express";
-import {UserService} from "../service/UserService.js";
-import Auth from "../middleware/Auth.js";
-import {UserRepository} from "../model/dao/repository/UserRepository.js";
-import {userDto} from "../model/dto/User.js";
-import {uploadAvatar} from "../middleware/Multer.js";
+import {UserService} from "../service/user-service.js";
+import Auth from "../middleware/auth-middleware.js";
+import {UserRepository} from "../model/dao/repository/user-repository.js";
+import {userDto} from "../model/dto/user-dto.js";
+import {uploadAvatar} from "../middleware/multer-middleware.js";
 
 const router = express.Router();
 
