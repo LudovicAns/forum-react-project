@@ -11,6 +11,7 @@ import {Button} from "../../catalyst-ui/button.jsx";
 import clsx from "clsx";
 import {PostContext} from "../../../context/PostContextProvider.jsx";
 import {useNavigate} from "react-router";
+import {updateSchemaValidation} from "../../../validation/Post.js";
 
 function EditPostForm() {
 
@@ -26,15 +27,15 @@ function EditPostForm() {
         formState: { errors, isLoading },
         reset
     } = useForm({
-        resolver: zodResolver(undefined),
+        resolver: zodResolver(updateSchemaValidation),
     });
 
     const navigate = useNavigate();
 
     function onSubmit(data) {
-        updatePost(data, () => {
-            navigate(`forum/post/${post.id}`);
-        },() => {
+        updatePost(data, (res) => {
+            navigate(`/forum/posts/${post._id}`);
+        },(error) => {
 
         }, () => {
             reset();
@@ -61,7 +62,7 @@ function EditPostForm() {
                     </Field>
                 </FieldGroup>
                 <Divider className={"my-4"}/>
-                <Button type={"submit"} disabled={isLoading} className={clsx("w-full", isLoading ? "cursor-wait" : "cursor-pointer")}>Publier</Button>
+                <Button type={"submit"} disabled={isLoading} className={clsx("w-full", isLoading ? "cursor-wait" : "cursor-pointer")}>Enregistrer</Button>
             </Fieldset>
         </form>
     );

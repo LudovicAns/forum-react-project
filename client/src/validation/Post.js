@@ -29,3 +29,8 @@ export const createSchemaValidation = z.object({
             }, INVALID_COMMENT_ID)
     ).optional()
 });
+
+export const updateSchemaValidation = z.object({
+    title: z.string().min(3, INVALID_POST_TITLE_LENGTH),
+    content: z.string().min(50, INVALID_POST_CONTENT_LENGTH),
+})

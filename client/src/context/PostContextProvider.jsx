@@ -54,9 +54,15 @@ export function PostContextProvider({children}) {
     function updatePost(data, onSuccess, onError, onEnd) {
         setIsLoading(true);
         setError(null);
-        axios.get(`${import.meta.env.VITE_BACKEND_HOST}api/posts/${postId}`, {withCredentials: true})
+        axios.put(`${import.meta.env.VITE_BACKEND_HOST}api/posts/${postId}`, {
+            ...data
+        }, {
+            withCredentials: true
+        })
             .then(res => {
-                setPost(res.data.data);
+                setPost({
+                    ...res.data.data
+                });
                 if (onSuccess) onSuccess(res);
             })
             .catch(err => {
@@ -77,11 +83,6 @@ export function PostContextProvider({children}) {
             deletePost,
             updatePost
         }}>
-            {
-                error &&
-                // todo : Traiter l'erreur correctement (mauvais format d'id (400) ?, post introuvable (204), ...)
-                <Error404/>
-            }
             {children ? children : <Outlet/>}
         </PostContext.Provider>
     )

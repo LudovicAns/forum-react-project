@@ -18,9 +18,6 @@ async function CheckIsPostAuthor(req, res, next) {
             });
         }
 
-        console.log(post.author.id)
-        console.log(new mongoose.Types.ObjectId(userId))
-
         if (post.author.id.toString() !== userId) {
             return res.status(401).json({
                 message: "Vous devez être l'auteur du post pour effectuer cette action."
@@ -94,7 +91,7 @@ router.put("/:id", Auth, CheckIsPostAuthor, async (req, res) => {
     const post = req.body;
 
     PostService.updatePost({
-        id_: postId,
+        _id: postId,
         ...post,
     })
         .then(post => {
@@ -104,7 +101,8 @@ router.put("/:id", Auth, CheckIsPostAuthor, async (req, res) => {
                 });
             }
             return res.status(200).json({
-                message: "Post mis à jour avec succès."
+                message: "Post mis à jour avec succès.",
+                data: post
             })
         })
         .catch(err => {
