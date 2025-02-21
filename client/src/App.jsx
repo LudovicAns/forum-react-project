@@ -13,6 +13,7 @@ import Error404 from "./component/page/Error404.jsx";
 import PublicProfile from "./component/page/PublicProfile.jsx";
 import AppLayout from "./component/layout/AppLayout.jsx";
 import NewPost from "./component/page/Forum/NewPost.jsx";
+import PublicPost from "./component/page/Forum/PublicPost.jsx";
 
 function App() {
 
@@ -52,6 +53,12 @@ function App() {
                 <Route path={"forum/new-post"} element={
                     <RedirectIfNotConnected>
                         <NewPost/>
+                    </RedirectIfNotConnected>
+                }/>
+
+                <Route path={"forum/post/:id"} element={
+                    <RedirectIfNotConnected>
+                        <PublicPost/>
                     </RedirectIfNotConnected>
                 }/>
 
