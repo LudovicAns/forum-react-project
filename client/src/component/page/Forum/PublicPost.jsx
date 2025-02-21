@@ -33,6 +33,8 @@ function PublicPost(props) {
 
     if (postError) return (<Text>{error.message}</Text>);
 
+    if (post === null) return null;
+
     const isOwner = userContext.user.id === post?.author.id;
 
     function onDeletePost() {

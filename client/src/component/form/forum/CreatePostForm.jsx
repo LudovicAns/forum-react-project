@@ -34,7 +34,7 @@ function CreatePostForm(props) {
             author: userContext.user.id
         }, {withCredentials: true})
             .then(res => {
-                navigate("/forum");
+                navigate("/forum/posts");
             })
             .catch(err => {
                 console.error(err);

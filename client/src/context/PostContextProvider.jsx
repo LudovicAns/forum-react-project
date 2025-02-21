@@ -37,20 +37,20 @@ export function PostContextProvider({children}) {
     function deletePost(onSuccess, onError, onEnd) {
         setIsLoading(true);
         setError(null);
-        axios.delete(`${import.meta.env.VITE_BACKEND_URL}api/posts/${postId}`, {
+        axios.delete(`${import.meta.env.VITE_BACKEND_HOST}api/posts/${postId}`, {
             withCredentials: true
         })
             .then(res => {
-                setPost(null);
                 if (onSuccess) onSuccess(res);
+                setPost(null);
             })
             .catch(err => {
-                setError(err);
                 if (onError) onError(err);
+                setError(err);
             })
             .finally(() => {
-                setIsLoading(false);
                 if (onEnd) onEnd();
+                setIsLoading(false);
             });
     }
 
@@ -63,18 +63,18 @@ export function PostContextProvider({children}) {
             withCredentials: true
         })
             .then(res => {
+                if (onSuccess) onSuccess(res);
                 setPost({
                     ...res.data.data
                 });
-                if (onSuccess) onSuccess(res);
             })
             .catch(err => {
-                setError(err);
                 if (onError) onError(err);
+                setError(err);
             })
             .finally(() => {
-                setIsLoading(false);
                 if (onEnd) onEnd();
+                setIsLoading(false);
             });
     }
 
