@@ -14,9 +14,12 @@ export function PostContextProvider({children}) {
     const [post, setPost] = useState(null);
 
     useEffect(() => {
+        fetchPost();
+    }, []);
+
+    function fetchPost() {
         setIsLoading(true);
         setError(null);
-        setPost(null);
         axios.get(`${import.meta.env.VITE_BACKEND_HOST}api/posts/${postId}`, {
             withCredentials: true
         })
@@ -29,7 +32,7 @@ export function PostContextProvider({children}) {
             .finally(() => {
                 setIsLoading(false);
             });
-    }, []);
+    }
 
     function deletePost(onSuccess, onError, onEnd) {
         setIsLoading(true);
@@ -81,7 +84,8 @@ export function PostContextProvider({children}) {
             error,
             post,
             deletePost,
-            updatePost
+            updatePost,
+            refreshPost: fetchPost
         }}>
             {children ? children : <Outlet/>}
         </PostContext.Provider>
