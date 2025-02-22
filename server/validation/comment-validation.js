@@ -1,6 +1,7 @@
 import z from "zod";
 import mongoose from "mongoose";
 import {UserRepository} from "../model/dao/repository/user-repository.js";
+import {PostRepository} from "../model/dao/repository/post-repository.js";
 
 const INVALID_MONGOOSE_OBJECT_ID = "L'id n'est pas valide."
 const INVALID_AUTHOR_ID = "L'auteur n'existe pas."
@@ -15,6 +16,14 @@ const createSchemaValidation = z.object({
             }
             return true;
         }, INVALID_AUTHOR_ID),
+    post: z.string()
+        .refine(value => mongoose.Types.ObjectId.isValid(value), INVALID_MONGOOSE_OBJECT_ID)
+        .refine((value) => {
+            if (PostRepository.getById(value) === null) {
+                return false;
+            }
+            return true;
+        }),
     content: z.string().min(10, INVALID_CONTENT_LENGTH)
 });
 
@@ -32,8 +41,18 @@ const updateSchemaValidation = z.object({
                 return false;
             }
             return true;
-        }, INVALID_AUTHOR_ID),
-    content: z.string().min(10, INVALID_CONTENT_LENGTH)
+        }, INVALID_AUTHOR_ID)
+        .optional(),
+    post: z.string()
+        .refine(value => mongoose.Types.ObjectId.isValid(value), INVALID_MONGOOSE_OBJECT_ID)
+        .refine((value) => {
+            if (PostRepository.getById(value) === null) {
+                return false;
+            }
+            return true;
+        })
+        .optional(),
+    content: z.string().min(10, INVALID_CONTENT_LENGTH).optional()
 });
 
 export function validateUpdateComment(data) {
