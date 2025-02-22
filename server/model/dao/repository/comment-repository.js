@@ -38,7 +38,7 @@ export const CommentRepository = {
     },
 
     updateById: async function (id, newComment) {
-        return await Comment.findByIdAndUpdate(id, newComment).populate(populateComment).exec();
+        return await Comment.findByIdAndUpdate(id, newComment, {new: true}).populate(populateComment).exec();
     },
 
     deleteById: async function (id) {
