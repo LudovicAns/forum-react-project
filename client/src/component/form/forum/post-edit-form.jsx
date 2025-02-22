@@ -1,9 +1,8 @@
 import React, {useContext} from 'react';
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {Fieldset, Legend} from "@headlessui/react";
 import {Text} from "../../catalyst-ui/text.jsx";
-import {Description, ErrorMessage, Field, FieldGroup, Label} from "../../catalyst-ui/fieldset.jsx";
+import {Description, ErrorMessage, Field, FieldGroup, Fieldset, Label, Legend} from "../../catalyst-ui/fieldset.jsx";
 import {Input} from "../../catalyst-ui/input.jsx";
 import {Textarea} from "../../catalyst-ui/textarea.jsx";
 import {Divider} from "../../catalyst-ui/divider.jsx";
