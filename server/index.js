@@ -1,11 +1,12 @@
 import express from 'express';
 import 'dotenv/config'
 import {connect as connectMongoDB} from "./model/database/mongodb.js";
-import UserRouter from "./controller/user-controller.js";
-import PostRouter from "./controller/post-controller.js";
+import UserController from "./controller/user-controller.js";
+import PostController from "./controller/post-controller.js";
 import loggerMiddleware from "./middleware/logger-middleware.js";
 import cors from 'cors';
 import cookieParser from "cookie-parser";
+import CommentController from "./controller/comment-controller.js";
 
 const app = express();
 const PORT = process.env.APP_PORT;
@@ -38,7 +39,8 @@ connectMongoDB()
         console.error(`Erreur lors de la connexion à la base de données: ${error.message}`);
     });
 
-app.use("/api/users", UserRouter);
-app.use("/api/posts", PostRouter);
+app.use("/api/users", UserController);
+app.use("/api/posts", PostController);
+app.use("/api/comments", CommentController)
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
