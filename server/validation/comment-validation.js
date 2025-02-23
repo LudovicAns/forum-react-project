@@ -5,7 +5,7 @@ import {PostRepository} from "../model/dao/repository/post-repository.js";
 
 const INVALID_MONGOOSE_OBJECT_ID = "L'id n'est pas valide."
 const INVALID_AUTHOR_ID = "L'auteur n'existe pas."
-const INVALID_CONTENT_LENGTH = "Le contenu doit contenir au minimul 10 caractères."
+const INVALID_CONTENT_LENGTH = "Le contenu doit contenir au minimum 10 caractères."
 
 const createSchemaValidation = z.object({
     author: z.string()

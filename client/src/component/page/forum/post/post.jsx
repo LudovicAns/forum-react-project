@@ -104,7 +104,7 @@ function Post(props) {
                     </div>
 
                     <Divider className={"my-4"}/>
-                    <WritePostCommentWidget post={post}/>
+                    <WritePostCommentWidget post={null}/>
 
                     {
                         post.comments?.length > 0 && (

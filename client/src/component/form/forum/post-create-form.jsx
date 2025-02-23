@@ -63,9 +63,9 @@ function PostCreateForm(props) {
                         <ErrorMessage>{errors.content?.message}</ErrorMessage>
                     </Field>
                 </FieldGroup>
-                <Divider className={"my-4"}/>
-                <Button type={"submit"} disabled={isLoading} className={clsx("w-full", isLoading ? "cursor-wait" : "cursor-pointer")}>Publier</Button>
             </Fieldset>
+            <Divider className={"my-4"}/>
+            <Button type={"submit"} disabled={isLoading} className={clsx("w-full", isLoading ? "cursor-wait" : "cursor-pointer")}>Publier</Button>
         </form>
     );
 }
