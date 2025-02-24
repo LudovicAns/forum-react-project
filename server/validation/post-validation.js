@@ -51,17 +51,7 @@ const updateSchemaValidation = z.object({
             }
             return true;
         }, INVALID_AUTHOR_ID)
-        .optional(),
-    comments: z.array(
-        z.string()
-            .refine((value) => mongoose.Types.ObjectId.isValid(value), INVALID_ID_FORMAT)
-            .refine((value) => {
-                if (CommentRepository.getById(value) === null) {
-                    return false;
-                }
-                return true;
-            }, INVALID_COMMENT_ID)
-    ).optional()
+        .optional()
 });
 
 export function updatePostValidation(data) {
