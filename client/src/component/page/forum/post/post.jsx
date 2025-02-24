@@ -13,6 +13,7 @@ import {PencilSquareIcon, TrashIcon} from "@heroicons/react/20/solid/index.js";
 import {Alert, AlertActions, AlertDescription, AlertTitle} from "../../../catalyst-ui/alert.jsx";
 import error from "eslint-plugin-react/lib/util/error.js";
 import {PostContext} from "../../../../context/post-context-provider.jsx";
+import PostCommentList from "../../../widget/forum/post/post-comment-list.jsx";
 
 function Post(props) {
 
@@ -104,17 +105,19 @@ function Post(props) {
                     </div>
 
                     <Divider className={"my-4"}/>
-                    <WritePostCommentWidget post={null}/>
+                    <WritePostCommentWidget className={"my-4"} post={null}/>
 
                     {
                         post.comments?.length > 0 && (
                             <div>
-                                <Heading>Commentaires</Heading>
-                                {
-                                    post.comments.map((comment) => (
-                                        <PostCommentCard key={comment.id} comment={comment} />
-                                    ))
-                                }
+                                <Heading className={"mb-4"}>Commentaires</Heading>
+                                <PostCommentList>
+                                    {
+                                        post.comments.map((comment) => (
+                                            <PostCommentCard key={comment._id} commentId={comment._id} />
+                                        ))
+                                    }
+                                </PostCommentList>
                             </div>
                         )
                     }

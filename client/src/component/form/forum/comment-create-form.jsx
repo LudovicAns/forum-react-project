@@ -54,8 +54,6 @@ function CommentCreateForm({post = null}) {
             });
     }
 
-    console.log(post);
-
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <Fieldset>
