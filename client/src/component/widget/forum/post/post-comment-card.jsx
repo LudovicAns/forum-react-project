@@ -21,6 +21,12 @@ import {
 import {PostContext} from "../../../../context/post-context-provider.jsx";
 import {Badge} from "../../../catalyst-ui/badge.jsx";
 import {Alert, AlertActions, AlertDescription, AlertTitle} from "../../../catalyst-ui/alert.jsx";
+import {useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {ErrorMessage, Field, FieldGroup, Fieldset} from "../../../catalyst-ui/fieldset.jsx";
+import {Textarea} from "../../../catalyst-ui/textarea.jsx";
+import {updateSchemaValidation} from "../../../../validation/comment-validation.js";
+import clsx from "clsx";
 
 function PostCommentCard({commentId}) {
 
@@ -34,6 +40,17 @@ function PostCommentCard({commentId}) {
     const [error, setError] = useState(null);
 
     const [deleteAlertOpen, setDeleteAlertOpen] = useState(false);
+
+    const [updateCommentFormOpen, setUpdateCommentFormOpen] = useState(false);
+
+    const {
+        register,
+        handleSubmit,
+        formState: {errors, isLoading: isUpdateCommentLoading},
+        reset
+    } = useForm({
+        resolver: zodResolver(updateSchemaValidation)
+    });
 
     useEffect(() => {
         axios.get(`${import.meta.env.VITE_BACKEND_HOST}api/comments/${commentId}`, {
@@ -72,11 +89,13 @@ function PostCommentCard({commentId}) {
         }
 
         return (
-            <Alert open={deleteAlertOpen} onClose={setDeleteAlertOpen} >
+            <Alert open={deleteAlertOpen} onClose={setDeleteAlertOpen}>
                 <AlertTitle>Confirmez la suppression</AlertTitle>
                 <AlertDescription>Êtes-vous certain de vouloir supprimer le commentaire ?</AlertDescription>
                 <AlertActions>
-                    <Button autoFocus={true} plain={true} onClick={() => {setDeleteAlertOpen(false)}}>
+                    <Button autoFocus={true} plain={true} onClick={() => {
+                        setDeleteAlertOpen(false)
+                    }}>
                         Annuler
                     </Button>
                     <Button color={"red"} onClick={onDeleteComment} className={"cursor-pointer"}>
@@ -101,15 +120,18 @@ function PostCommentCard({commentId}) {
                             <>
                                 <DropdownSection>
                                     <DropdownHeading>
-                                        Votre commentaire <Badge color={"yellow"}>Bientôt disponible</Badge>
+                                        Votre commentaire
                                     </DropdownHeading>
-                                    <DropdownItem className={"cursor-pointer"}>
+                                    <DropdownItem onClick={() => setUpdateCommentFormOpen(true)} className={"cursor-pointer"}>
                                         <PencilSquareIcon/>
                                         <DropdownLabel>Modifier</DropdownLabel>
                                     </DropdownItem>
-                                    <DropdownItem onClick={() => setDeleteAlertOpen(true)} className={"cursor-pointer"}>
-                                        <TrashIcon/>
-                                        <DropdownLabel>Supprimer</DropdownLabel>
+                                    <DropdownItem
+                                        onClick={() => setDeleteAlertOpen(true)}
+                                        className="cursor-pointer group"
+                                    >
+                                        <TrashIcon className="fill-red-500 group-hover:fill-white" />
+                                        <DropdownLabel className="text-red-500 group-hover:text-white">Supprimer</DropdownLabel>
                                     </DropdownItem>
                                 </DropdownSection>
 
@@ -122,14 +144,55 @@ function PostCommentCard({commentId}) {
                         <DropdownHeading>
                             Actions <Badge color={"yellow"}>Bientôt disponible</Badge>
                         </DropdownHeading>
-                        <DropdownItem className={"cursor-pointer"}>
-                            <ExclamationCircleIcon/>
+                        <DropdownItem disabled={true}>
+                            <ExclamationCircleIcon />
                             Signaler
                         </DropdownItem>
                     </DropdownSection>
                 </DropdownMenu>
 
             </Dropdown>
+        );
+    }
+
+    function updateCommentForm() {
+        function onSubmit(data) {
+            axios.put(`${import.meta.env.VITE_BACKEND_HOST}api/comments/${commentId}`, data, {
+                withCredentials: true
+            })
+                .then(res => {
+                    postContext.refreshPost();
+                    reset();
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+        }
+
+        return (
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <Fieldset>
+                    <FieldGroup>
+                        <Field>
+                            <Textarea
+                                rows={6}
+                                name="content"
+                                invalid={!!errors.content}
+                                {...register('content')}
+                                className={"w-full"}
+                                defaultValue={comment.content}
+                                placeholder={"Votre commentaire ..."}
+                                resizable={false}
+                            />
+                            <ErrorMessage>{errors.content?.message}</ErrorMessage>
+                        </Field>
+                    </FieldGroup>
+                </Fieldset>
+                <div className={"flex flex-row justify-end gap-2"}>
+                    <Button type={"button"} onClick={() => setUpdateCommentFormOpen(false)} className={"w-fit cursor-pointer"} plain={true}>Annuler</Button>
+                    <Button type={"submit"} disabled={isUpdateCommentLoading} className={"w-fit cursor-pointer"}>Modifier</Button>
+                </div>
+            </form>
         );
     }
 
@@ -141,7 +204,20 @@ function PostCommentCard({commentId}) {
                     {dropDownMenu()}
                 </div>
                 <Divider className={"my-4"}/>
-                <Text>{comment.content}</Text>
+                {
+                    updateCommentFormOpen ?
+                        updateCommentForm()
+                        :
+                        <>
+                            {
+                                comment.content.split("\n").map((line, index) => (
+                                    <Text key={index}>
+                                        {line}
+                                    </Text>
+                                ))
+                            }
+                        </>
+                }
             </div>
         );
     }

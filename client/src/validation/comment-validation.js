@@ -5,3 +5,7 @@ const INVALID_CONTENT_LENGTH = "Le contenu doit contenir au minimum 10 caractèr
 export const createSchemaValidation = z.object({
     content: z.string().min(10, INVALID_CONTENT_LENGTH)
 });
+
+export const updateSchemaValidation = z.object({
+    content: z.string().min(10, INVALID_CONTENT_LENGTH)
+})
