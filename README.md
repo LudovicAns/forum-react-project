@@ -1,4 +1,44 @@
-# Configuration des variables d'environnement
+# Présentation de l'Application
+
+Cette application offre une plateforme interactive permettant de créer, lire, mettre à jour, et supprimer des posts, tout en facilitant l'inscription et la connexion des utilisateurs.
+
+## ✨ Aperçu des principales fonctionnalités
+
+Voici quelques captures d'écrans pour mieux visualiser les interfaces et les principales fonctionnalités de l'application.
+
+### 1. Page d'inscription
+
+Interface permettant aux utilisateurs de s'inscrire avec leurs informations personnelles.
+
+![Page d'inscription](screenshots/register-page.png)
+
+---
+
+### 2. Page de profil
+
+Vue de la page de profil de l'utilisateur, où ce dernier peut voir et gérer ses informations.
+
+![Page de profil](screenshots/profile-page.png)
+
+---
+
+### 3. Page des posts
+
+Page principale listant tous les posts créés par les utilisateurs.
+
+![Page des posts](screenshots/posts-page.png)
+
+---
+
+### 4. Page d'un post individuel
+
+Interface montrant le détail d'un post spécifique.
+
+![Page de post](screenshots/post-page.png)
+
+---
+
+## Configuration des variables d'environnement
 
 Ce projet utilise des fichiers `.env` pour configurer certaines parties de l'application : une pour le **client** (Frontend) et une pour le **serveur** (Backend).
 Ces fichiers doivent être créés à la racine des répertoires respectifs. Voici les détails des variables nécessaires et leurs valeurs attendues.
