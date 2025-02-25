@@ -28,7 +28,7 @@ function PostCard({post}) {
             <div className={"flex-row flex gap-1"}>
                 <ChatBubbleOvalLeftEllipsisIcon className={"size-[22px] fill-zinc-500"}/>
                 <Text>
-                    {post.comments.length}
+                    {post.comments?.length}
                 </Text>
             </div>
             <Button color={"dark"} href={`/forum/posts/${post._id}`} className={"mt-4"}>

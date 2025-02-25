@@ -15,11 +15,7 @@ export const PostService = {
             throw new Error(`Field '${validation.error.issues[0].path[0]}' : ${validation.error.issues[0].message}`);
         }
 
-        const newPost = await PostRepository.create(data);
-
-        const author = await UserRepository.getById(data.author);
-        author.posts.push(newPost._id);
-        await author.save();
+        return await PostRepository.create(data);
     },
 
     getPosts: async () => {
@@ -53,21 +49,6 @@ export const PostService = {
             throw new Error(`Field '${validation.error.issues[0].path[0]}' : ${validation.error.issues[0].message}`);
         }
 
-        const post = await PostRepository.getById(data._id);
-
-        if (!post) {
-            throw new Error('Post not found');
-        }
-
-        if (data.author && data.author !== post.author) {
-            const oldAuthor = await UserRepository.getById(post.author.id);
-            oldAuthor.posts.pull(post._id);
-            await oldAuthor.save();
-            const newAuthor = await UserRepository.getById(data.author);
-            newAuthor.posts.push(post._id);
-            await newAuthor.save();
-        }
-
         await PostRepository.updateById(data._id, data);
     },
 
@@ -77,16 +58,6 @@ export const PostService = {
         if (!validation.success) {
             throw new Error(`Field '${validation.error.issues[0].path[0]}' : ${validation.error.issues[0].message}`);
         }
-
-        const post = await PostRepository.getById(data.id);
-
-        if (!post) {
-            throw new Error('Post not found');
-        }
-
-        const author = await UserRepository.getById(post.author.id);
-        author.posts.pull(post._id);
-        await author.save();
 
         return await PostRepository.deleteById(data.id);
     }

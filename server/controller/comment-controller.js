@@ -85,7 +85,7 @@ router.delete("/:id", AuthMiddleware, async (req, res) => {
     const commentId = req.params.id;
 
     CommentService.deleteComment({
-        _id: commentId,
+        id: commentId,
     })
         .then(comment => {
             return res.status(200).json({

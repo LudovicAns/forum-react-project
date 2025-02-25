@@ -27,8 +27,9 @@ export const CommentRepository = {
 
     getById: async function (id) {
         try {
-            return await Comment.findOne({_id: id}).populate(populateComment).exec();
+            return await Comment.findById(id).populate(populateComment).exec();
         } catch (error) {
+            console.error(error);
             return null;
         }
     },

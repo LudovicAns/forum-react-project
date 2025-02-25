@@ -52,11 +52,14 @@ function Post(props) {
 
     const ownerActions = (
         <div className={"flex flex-row gap-4 w-full justify-end max-lg:justify-center mb-4"}>
-            <Button color={"light"} className={"cursor-pointer !text-blue-500"} href={"/forum/posts/" + post._id + "/edit"}>
+            <Button color={"light"} className={"cursor-pointer !text-blue-500"}
+                    href={"/forum/posts/" + post._id + "/edit"}>
                 <PencilSquareIcon className={"fill-blue-500"}/>
                 Modifier
             </Button>
-            <Button color={"light"} className={"cursor-pointer !text-red-500"} onClick={() => {setDeleteAlertOpen(true)}}>
+            <Button color={"light"} className={"cursor-pointer !text-red-500"} onClick={() => {
+                setDeleteAlertOpen(true)
+            }}>
                 <TrashIcon className={"fill-red-500"}/>
                 Supprimer
             </Button>
@@ -64,7 +67,9 @@ function Post(props) {
                 <AlertTitle>Confirmez la suppression</AlertTitle>
                 <AlertDescription>Êtes-vous certain de vouloir supprimer le post ?</AlertDescription>
                 <AlertActions>
-                    <Button autoFocus={true} plain={true} onClick={() => {setDeleteAlertOpen(false)}}>
+                    <Button autoFocus={true} plain={true} onClick={() => {
+                        setDeleteAlertOpen(false)
+                    }}>
                         Annuler
                     </Button>
                     <Button color={"red"} onClick={onDeletePost} className={"cursor-pointer"}>
@@ -113,9 +118,13 @@ function Post(props) {
                                 <Heading className={"mb-4"}>Commentaires</Heading>
                                 <PostCommentList>
                                     {
-                                        post.comments.map((comment) => (
-                                            <PostCommentCard key={comment._id} commentId={comment._id} />
-                                        ))
+                                        post.comments
+                                            .filter(comment => comment._id)
+                                            .map((comment) => {
+                                                return (
+                                                    <PostCommentCard key={comment._id} commentId={comment._id}/>
+                                                )
+                                            })
                                     }
                                 </PostCommentList>
                             </div>

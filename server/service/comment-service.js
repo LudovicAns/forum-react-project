@@ -16,20 +16,7 @@ export const CommentService = {
             throw new Error(`Field '${validation.error.issues[0].path[0]}' : ${validation.error.issues[0].message}`);
         }
 
-        const createdComment = await CommentRepository.create(data);
-
-        // Update the related post to include the new comment
-        await PostRepository.updateById(data.post, {
-            $push: {comments: createdComment._id}
-        });
-
-        await UserRepository.update(
-            data.author,
-            {
-                $push: {comments: createdComment._id}
-            });
-
-        return createdComment;
+        return await CommentRepository.create(data);
     },
 
     getComments: async () => {
@@ -53,30 +40,6 @@ export const CommentService = {
             throw new Error(`Field '${validation.error.issues[0].path[0]}' : ${validation.error.issues[0].message}`);
         }
 
-        const comment = await CommentRepository.getById(data.id);
-
-        if (!comment) {
-            throw new Error('Comment not found');
-        }
-
-        if (data.author && data.author !== comment.author) {
-            UserRepository.update(comment.author, {
-               $pull: {comments: comment._id}
-            });
-            UserRepository.update(data.author, {
-                $push: {comments: comment._id}
-            });
-        }
-
-        if (data.post && data.post !== comment.post) {
-            PostRepository.updateById(comment.post, {
-               $pull: {comments: comment._id}
-            });
-            PostRepository.updateById(data.post, {
-                $push: {comments: comment._id}
-            });
-        }
-
         return await CommentRepository.updateById(data._id, data);
     },
 
@@ -86,14 +49,6 @@ export const CommentService = {
         if (!validation.success) {
             throw new Error(`Field '${validation.error.issues[0].path[0]}' : ${validation.error.issues[0].message}`);
         }
-
-        PostRepository.updateById(data.post, {
-            $pull: {comments: data.id}
-        });
-
-        UserRepository.update(data.author, {
-            $pull: {comments: data.id}
-        });
 
         return await CommentRepository.deleteById(data.id);
     }

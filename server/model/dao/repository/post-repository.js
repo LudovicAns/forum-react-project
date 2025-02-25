@@ -11,7 +11,7 @@ const populatePost = [
         transform: (doc, id) => {
             return {
                 ...doc,
-                author: userDto(doc.author)
+                author: doc?.author && userDto(doc.author)
             }
         }
     }
@@ -25,7 +25,7 @@ export const PostRepository = {
 
     getById: async function (id) {
         try {
-            return await Post.findOne({_id: id}).populate(populatePost).exec();
+            return await Post.findById(id).populate(populatePost).exec();
         } catch (error) {
             return null;
         }

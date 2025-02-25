@@ -20,6 +20,7 @@ import {
 } from "../../../catalyst-ui/dropdown.jsx";
 import {PostContext} from "../../../../context/post-context-provider.jsx";
 import {Badge} from "../../../catalyst-ui/badge.jsx";
+import {Alert, AlertActions, AlertDescription, AlertTitle} from "../../../catalyst-ui/alert.jsx";
 
 function PostCommentCard({commentId}) {
 
@@ -31,6 +32,8 @@ function PostCommentCard({commentId}) {
     const [comment, setComment] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const [deleteAlertOpen, setDeleteAlertOpen] = useState(false);
 
     useEffect(() => {
         axios.get(`${import.meta.env.VITE_BACKEND_HOST}api/comments/${commentId}`, {
@@ -49,7 +52,43 @@ function PostCommentCard({commentId}) {
 
     const isOwner = userContext.user.id === comment?.author.id;
 
+    function deleteAlertComp() {
+
+        function onDeleteComment() {
+            axios.delete(`${import.meta.env.VITE_BACKEND_HOST}api/comments/${commentId}`, {
+                withCredentials: true
+            })
+                .then(response => {
+                    if (postContext) {
+                        postContext.refreshPost();
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                })
+                .finally(() => {
+                    setDeleteAlertOpen(false);
+                })
+        }
+
+        return (
+            <Alert open={deleteAlertOpen} onClose={setDeleteAlertOpen} >
+                <AlertTitle>Confirmez la suppression</AlertTitle>
+                <AlertDescription>Êtes-vous certain de vouloir supprimer le commentaire ?</AlertDescription>
+                <AlertActions>
+                    <Button autoFocus={true} plain={true} onClick={() => {setDeleteAlertOpen(false)}}>
+                        Annuler
+                    </Button>
+                    <Button color={"red"} onClick={onDeleteComment} className={"cursor-pointer"}>
+                        Confirmer
+                    </Button>
+                </AlertActions>
+            </Alert>
+        )
+    }
+
     function dropDownMenu() {
+
         return (
             <Dropdown>
                 <DropdownButton as={Button} plain={true}>
@@ -68,7 +107,7 @@ function PostCommentCard({commentId}) {
                                         <PencilSquareIcon/>
                                         <DropdownLabel>Modifier</DropdownLabel>
                                     </DropdownItem>
-                                    <DropdownItem className={"cursor-pointer"}>
+                                    <DropdownItem onClick={() => setDeleteAlertOpen(true)} className={"cursor-pointer"}>
                                         <TrashIcon/>
                                         <DropdownLabel>Supprimer</DropdownLabel>
                                     </DropdownItem>
@@ -109,6 +148,7 @@ function PostCommentCard({commentId}) {
 
     return (
         <div className={`flex flex-col border border-zinc-950/10 dark:border-white/10 rounded-md p-8`}>
+            {deleteAlertComp()}
             {
                 isLoading ?
                     (<Text>Chargement ...</Text>)

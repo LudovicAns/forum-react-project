@@ -57,7 +57,7 @@ router.get("/", Auth, async (req, res) => {
             });
         })
         .catch(err => {
-            res.status(400).json({
+            return res.status(400).json({
                 message: err.message
             })
         });
