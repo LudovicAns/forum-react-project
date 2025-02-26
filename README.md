@@ -98,10 +98,12 @@ MONGODB_AUTH_SOURCE=admin
 ```env
 USER_AUTH_SECRET_KEY=ShF9lGxET8iZ3arwmnRYztUyTxaVgiF3aUbLF4f74ZEZTdt14FtNlXdoD4bh7Ttw
 USER_AUTH_EXPIRES_IN=86400000
+USER_AUTH_EXPIRES_IN_REMEMBER=604800000
 ```
 
 - **`USER_AUTH_SECRET_KEY`** : Clé secrète utilisée pour signer les tokens JWT. Il est important de garder cette clé sécurisée.
 - **`USER_AUTH_EXPIRES_IN`** : Durée d'expiration des tokens JWT en millisecondes. Par exemple, `86400000` correspond à 1 jour.
+- **`USER_AUTH_EXPIRES_IN_REMEMBER`** : Durée d'expiration des tokens JWT en millisecondes lorsque l'option "Se souvenir de moi" est coché.
 
 ---
 

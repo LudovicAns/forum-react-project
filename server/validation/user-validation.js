@@ -17,7 +17,8 @@ export function registerValidation(data) {
 const loginSchema = z.object({
     username: z.string().min(3, INVALID_USERNAME_LENGTH_MESSAGE).optional(),
     email: z.string().email(INVALID_EMAIL_MESSAGE).optional(),
-    password: z.string().min(8, INVALID_PASSWORD_LENGTH_MESSAGE).optional()
+    password: z.string().min(8, INVALID_PASSWORD_LENGTH_MESSAGE).optional(),
+    rememberMe: z.boolean().default(false).optional()
 }).refine(data => {
     return data.username || data.email;
 }, {

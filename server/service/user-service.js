@@ -62,7 +62,12 @@ export const UserService = {
         }
 
         return {
-            token: JwtService.sign({id: user.id}),
+            token: JwtService.sign({
+                id: user.id
+            }, {
+                rememberMe: data.rememberMe,
+            }),
+            rememberMe: data.rememberMe,
             user: user,
         };
     },

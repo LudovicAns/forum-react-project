@@ -24,13 +24,13 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
     UserService.login(req.body)
-        .then(({user, token}) => {
-            res
+        .then(({user, token, rememberMe}) => {
+            return res
                 .cookie('access_token', token, {
                     httpOnly: true,
                     secure: false,
                     sameSite: "Lax",
-                    maxAge: parseInt(process.env.USER_AUTH_EXPIRES_IN),
+                    maxAge: rememberMe ? parseInt(process.env.USER_AUTH_EXPIRES_IN_REMEMBER): parseInt(process.env.USER_AUTH_EXPIRES_IN),
                 })
                 .status(200)
                 .json({
@@ -40,7 +40,7 @@ router.post("/login", async (req, res) => {
                 });
         })
         .catch(error => {
-            res.status(400).json({
+            return res.status(400).json({
                 message: error.message,
             })
         })
