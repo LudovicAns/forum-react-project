@@ -58,7 +58,7 @@ function UserLoginForm() {
                     </Field>
                     <CheckboxField>
                         <Checkbox name={"rememberMe"} {...register("rememberMe")}/>
-                        <Label>Se souvenir de moi <Badge color={"yellow"}>Bientôt disponible</Badge></Label>
+                        <Label>Se souvenir de moi</Label>
                     </CheckboxField>
                     <Divider/>
                     <Button className={"w-full"} type={"submit"}>Connexion</Button>
