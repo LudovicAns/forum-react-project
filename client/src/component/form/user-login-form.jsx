@@ -4,7 +4,7 @@ import {Input} from "../catalyst-ui/input.jsx";
 import {Button} from "../catalyst-ui/button.jsx";
 import {Text, TextLink} from "../catalyst-ui/text.jsx";
 import {Divider} from "../catalyst-ui/divider.jsx";
-import {useForm} from "react-hook-form";
+import {Controller, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {loginSchema} from "../../validation/user-validation.js";
 import {UserContext} from "../../context/user-context.jsx";
@@ -19,6 +19,7 @@ function UserLoginForm() {
 
     const {
         register,
+        control,
         formState: {errors, isLoading},
         handleSubmit,
         reset
@@ -35,6 +36,8 @@ function UserLoginForm() {
         function onError(err) {
             setResponseMessage(err.response.data.message);
         }
+
+        console.log(data);
 
         userContext.login(data, onSuccess, onError);
     }
@@ -53,13 +56,20 @@ function UserLoginForm() {
                     </Field>
                     <Field>
                         <Label>Mot de passe</Label>
-                        <Input invalid={!!errors.password} name={"password"} type={"password"} {...register("password")} />
+                        <Input invalid={!!errors.password} name={"password"}
+                               type={"password"} {...register("password")} />
                         <ErrorMessage>{errors.password?.message}</ErrorMessage>
                     </Field>
-                    <CheckboxField>
-                        <Checkbox name={"rememberMe"} {...register("rememberMe")}/>
-                        <Label>Se souvenir de moi</Label>
-                    </CheckboxField>
+                    <Controller
+                        render={({field}) => <>
+                            <CheckboxField>
+                                <Checkbox {...field}/>
+                                <Label>Se souvenir de moi</Label>
+                            </CheckboxField>
+                        </>}
+                        control={control}
+                        name={"rememberMe"}
+                    />
                     <Divider/>
                     <Button className={"w-full"} type={"submit"}>Connexion</Button>
                     {
@@ -68,7 +78,8 @@ function UserLoginForm() {
                     }
                 </FieldGroup>
             </Fieldset>
-            <Text className={"mt-4 text-center"}>Vous n'avez pas encore de compte ? <TextLink href={"/register"}>Cliquez ici</TextLink></Text>
+            <Text className={"mt-4 text-center"}>Vous n'avez pas encore de compte ? <TextLink href={"/register"}>Cliquez
+                ici</TextLink></Text>
         </form>
     );
 }
