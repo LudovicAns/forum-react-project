@@ -45,7 +45,7 @@ function Posts(props) {
         setLoading(true);
         axios.get(`${import.meta.env.VITE_BACKEND_HOST}api/posts?page=${page}`, {withCredentials: true})
             .then(res => {
-                if (res.status === 204) return [];
+                if (res.status === 204) return setPosts([]);
                 setPosts(res.data.data);
             })
             .catch(err => {
@@ -54,7 +54,7 @@ function Posts(props) {
             .finally(() => {
                 setLoading(false);
             });
-    }, []);
+    }, [searchParams]);
 
     return (
         <main className={"flex flex-row max-lg:flex-col gap-4"}>

@@ -2,6 +2,7 @@ import React from 'react';
 import {Pagination, PaginationNext, PaginationPrevious} from "../../../catalyst-ui/pagination.jsx";
 import {Divider} from "../../../catalyst-ui/divider.jsx";
 import {useSearchParams} from "react-router";
+import {Button} from "../../../catalyst-ui/button.jsx";
 
 function PostCardList({children, pagination = false}) {
 
@@ -23,8 +24,10 @@ function PostCardList({children, pagination = false}) {
             {
                 pagination && (
                     <Pagination>
-                        <PaginationPrevious disabled={page == "1"} onClick={() => setSearchParams({page: page + 1})} href={"?page=" + (page - 1)}/>
-                        <PaginationNext onClick={() => setSearchParams({page: page + 1})} href={"?page=" + (page + 1)} />
+                        {
+                            page > 1 && <PaginationPrevious href={"?page=" + (page - 1)}/>
+                        }
+                        <PaginationNext href={"?page=" + (page + 1)} />
                     </Pagination>
                 )
             }
