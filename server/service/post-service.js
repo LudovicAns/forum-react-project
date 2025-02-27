@@ -18,8 +18,8 @@ export const PostService = {
         return await PostRepository.create(data);
     },
 
-    getPosts: async () => {
-        return await PostRepository.getAll();
+    getPosts: async ({page, limit}) => {
+        return await PostRepository.getAll({page, limit});
     },
 
     getPostById: async (data) => {

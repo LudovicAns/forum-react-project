@@ -47,7 +47,14 @@ router.post("/", Auth, async (req, res) => {
 });
 
 router.get("/", Auth, async (req, res) => {
-    PostService.getPosts()
+
+    const { page } = req.query;
+    const limit = 10;
+
+    PostService.getPosts({
+        page: page,
+        limit: limit
+    })
         .then(posts => {
             posts.length > 0 ? res.status(200) : res.status(204);
 

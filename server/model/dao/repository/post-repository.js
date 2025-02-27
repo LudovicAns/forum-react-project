@@ -42,8 +42,19 @@ export const PostRepository = {
         }
     },
 
-    getAll: async function () {
-        return await Post.find().populate(populatePost).exec();
+    getAll: async function ({page, limit}) {
+
+        const options = {};
+
+        if (page) {
+            options.skip = (page - 1) * limit;
+        }
+
+        if (limit) {
+            options.limit = limit;
+        }
+
+        return await Post.find({}, {}, options).populate(populatePost).exec();
     },
 
     updateById: async function (id, newPost) {
