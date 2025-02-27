@@ -18,6 +18,7 @@ import {Divider} from "../../../catalyst-ui/divider.jsx";
 import {Badge} from "../../../catalyst-ui/badge.jsx";
 import axios from "axios";
 import {Radio, RadioField, RadioGroup} from "../../../catalyst-ui/radio.jsx";
+import {useSearchParams} from "react-router";
 
 const availableSoon = (<Badge color={"yellow"}>Bientôt disponible</Badge>);
 
@@ -31,12 +32,18 @@ const newPostButton = (
 function Posts(props) {
     document.title = "Posts - Postes";
 
+    const [searchParams, setSearchParams] = useSearchParams();
+    let page = searchParams.get("page");
+    if (!page) {
+        page = "1";
+    }
+
     const [posts, setPosts] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
 
     useEffect(() => {
         setLoading(true);
-        axios.get(`${import.meta.env.VITE_BACKEND_HOST}api/posts`, {withCredentials: true})
+        axios.get(`${import.meta.env.VITE_BACKEND_HOST}api/posts?page=${page}`, {withCredentials: true})
             .then(res => {
                 if (res.status === 204) return [];
                 setPosts(res.data.data);
@@ -113,7 +120,7 @@ function Posts(props) {
             </div>
             {
                 posts.length > 0 && !loading && (
-                    <PostCardList>
+                    <PostCardList pagination={true}>
                         {
                             posts &&
                             posts.map(post => {
@@ -126,7 +133,7 @@ function Posts(props) {
                 )
             }
             {
-                posts.length === 0 && !loading && (
+                posts.length === 0 && !loading && page === 1 && (
                     <div className={"flex flex-col gap-4 w-full justify-center items-center"}>
                         <Heading>Aucun post, soit le premier à poster !</Heading>
                         <div>
