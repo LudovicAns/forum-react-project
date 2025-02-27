@@ -19,6 +19,7 @@ import {Badge} from "../../../catalyst-ui/badge.jsx";
 import axios from "axios";
 import {Radio, RadioField, RadioGroup} from "../../../catalyst-ui/radio.jsx";
 import {useSearchParams} from "react-router";
+import {ArrowUturnLeftIcon} from "@heroicons/react/16/solid/index.js";
 
 const availableSoon = (<Badge color={"yellow"}>Bientôt disponible</Badge>);
 
@@ -138,6 +139,23 @@ function Posts(props) {
                         <Heading>Aucun post, soit le premier à poster !</Heading>
                         <div>
                             {newPostButton}
+                        </div>
+                    </div>
+                )
+            }
+            {
+                posts.length === 0 && !loading && page > 1 && (
+                    <div className={"flex flex-col gap-4 w-full justify-center items-center"}>
+                        <Heading>Il n'y a aucun post sur cette page.</Heading>
+                        <div>
+                            <Button
+                                href={"/forum/posts"}
+                                color={"dark"}
+                                className={"w-full"}
+                            >
+                                <ArrowUturnLeftIcon/>
+                                Retour à la première page
+                            </Button>
                         </div>
                     </div>
                 )
