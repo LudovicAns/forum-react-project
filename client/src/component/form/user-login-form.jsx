@@ -37,8 +37,6 @@ function UserLoginForm() {
             setResponseMessage(err.response.data.message);
         }
 
-        console.log(data);
-
         userContext.login(data, onSuccess, onError);
     }
 
